@@ -19,11 +19,11 @@ Here's and example `<canvas>` element with the attributes filled out:
 ```
 <canvas id="truchettiles" data-style="15" data-color-1="#000000" data-color-2="#FFFFFF" data-size="50"></canvas>
 ```
-There is a [demo](https://www.johnprovazek.com/truchettiles/) you can use to test out different configurations. The demo has a button to copy the canvas configuration at the bottom.
+You can use the [demo](https://www.johnprovazek.com/truchettiles/) to test out different configurations. In the demo there is a button you can use to copy the configuration.
 
-Next you will need to include the file [truchettiles.js](./js/truchettiles.js).
+You will need to include the file [truchettiles.js](./js/truchettiles.js).
 
-Next you will need to include the file [truchettiles.css](./css/truchettiles.css). You may need to make some adjustments to get this to work with your project. This project is built assuming the body has a margin of 0 and the height and width are at 100vw and 100vh.
+You will need to include the file [truchettiles.css](./css/truchettiles.css). You may need to make some adjustments to get this to work with your project. This project is built assuming the body has a margin of 0 and the height and width are at 100vw and 100vh.
 
 ## Usage
 
