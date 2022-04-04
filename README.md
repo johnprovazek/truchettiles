@@ -29,6 +29,10 @@ Next you will need to include the file [truchettiles.css](./css/truchettiles.css
 
 Interact with the `<canvas>` with your mouse to change the orientation of the tiles.
 
+## Credits
+
+The majority of the truchet tile designs I used were taken from this [site](http://arearugscarpet.blogspot.com/2014/04/the-curse-of-truchets-tiles.html).
+
 ## Bugs & Improvements
 
 - Create the SVG tiles.
