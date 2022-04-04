@@ -146,9 +146,18 @@ html{
 
 .tileSelected{
     outline-width: min(1vw,5px);
-    outline-offset: -4px;
+    outline-offset: max(-1vw,-5px);
     outline-style: solid;
     animation-name: tileSelectedHighlight;
     animation-duration: 1s;
     animation-iteration-count: infinite;
 }
+
+#canvascopybutton{
+    cursor: pointer;
+}
+
+#canvascopybutton:hover{
+    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=);
+}
+

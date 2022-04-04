@@ -8,67 +8,67 @@
         <link rel="stylesheet" href="css/index.css">
     </head>
     <body>
-        <canvas id="truchettiles"></canvas>
+        <canvas id="truchettiles" data-style="15" data-color-1="#000000" data-color-2="#FFFFFF" data-size="50"></canvas>
         <div id="demogrid">
             <div id="TTT" class="demogriditem">
                 <img id="titleimage" src="img/demo/title.svg">
             </div>
             <div id="T01" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestiles/t01.png" onclick="tileSelect(this)">
+                <img class="tileimage" src="img/demo/lowrestileserror/t01.png" data-value="1" onclick="demoTileSelect(this)">
             </div>
             <div id="T02" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestiles/t02.png" onclick="tileSelect(this)">
+                <img class="tileimage" src="img/demo/lowrestileserror/t02.png" data-value="2" onclick="demoTileSelect(this)">
             </div>
             <div id="T03" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestiles/t03.png" onclick="tileSelect(this)">
+                <img class="tileimage" src="img/demo/lowrestileserror/t03.png" data-value="3" onclick="demoTileSelect(this)">
             </div>
             <div id="T04" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestiles/t04.png" onclick="tileSelect(this)">
+                <img class="tileimage" src="img/demo/lowrestileserror/t04.png" data-value="4" onclick="demoTileSelect(this)">
             </div>
             <div id="T05" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestiles/t05.png" onclick="tileSelect(this)">
+                <img class="tileimage" src="img/demo/lowrestileserror/t05.png" data-value="5" onclick="demoTileSelect(this)">
             </div>
             <div id="T06" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestiles/t06.png" onclick="tileSelect(this)">
+                <img class="tileimage" src="img/demo/lowrestileserror/t06.png" data-value="6" onclick="demoTileSelect(this)">
             </div>
             <div id="T07" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestiles/t07.png" onclick="tileSelect(this)">
+                <img class="tileimage" src="img/demo/lowrestileserror/t07.png" data-value="7" onclick="demoTileSelect(this)">
             </div>
             <div id="T08" class="demogriditem">
-                <img class="tileimage tileSelected" src="img/demo/lowrestiles/t08.png" onclick="tileSelect(this)">
+                <img class="tileimage" src="img/demo/lowrestileserror/t08.png" data-value="8" onclick="demoTileSelect(this)">
             </div>
             <div id="T09" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestiles/t09.png" onclick="tileSelect(this)">
+                <img class="tileimage" src="img/demo/lowrestileserror/t09.png" data-value="9" onclick="demoTileSelect(this)">
             </div>
             <div id="T10" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestiles/t10.png" onclick="tileSelect(this)">
+                <img class="tileimage" src="img/demo/lowrestileserror/t10.png" data-value="10" onclick="demoTileSelect(this)">
             </div>
             <div id="T11" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestiles/t11.png" onclick="tileSelect(this)">
+                <img class="tileimage" src="img/demo/lowrestileserror/t11.png" data-value="11" onclick="demoTileSelect(this)">
             </div>
             <div id="T12" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestiles/t12.png" onclick="tileSelect(this)">
+                <img class="tileimage" src="img/demo/lowrestileserror/t12.png" data-value="12" onclick="demoTileSelect(this)">
             </div>
             <div id="T13" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestiles/t13.png" onclick="tileSelect(this)">
+                <img class="tileimage" src="img/demo/lowrestileserror/t13.png" data-value="13" onclick="demoTileSelect(this)">
             </div>
             <div id="T14" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestiles/t14.png" onclick="tileSelect(this)">
+                <img class="tileimage" src="img/demo/lowrestileserror/t14.png" data-value="14" onclick="demoTileSelect(this)">
             </div>
             <div id="T15" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestiles/t15.png" onclick="tileSelect(this)">
+                <img class="tileimage tileSelected" src="img/demo/tiles/t15.svg" data-value="15" onclick="demoTileSelect(this)">
             </div>
             <div id="CL1" class="demogriditem">
-                <input type="text" id="colorinput1" class="colorinput" value="#FFFFFF">
+                <input type="text" id="colorinput1" class="colorinput" value="#000000" onchange="demoColorChange(this)">
             </div>
             <div id="CL2" class="demogriditem">
-                <input type="text" id="colorinput2" class="colorinput" value="#000000">
+                <input type="text" id="colorinput2" class="colorinput" value="#FFFFFF" onchange="demoColorChange(this)">
             </div>
             <div id="SZS" class="demogriditem">
-                <input type="range" min="1" max="100" value="50" class="slider" id="sizeslider">
+                <input type="range" min="1" max="100" value="50" class="slider" id="sizeslider" onchange="demoSizeChange(this)">
             </div>
             <div id="CNV" class="demogriditem">
-                <div id="canvascopybutton">copy &lt;canvas&gt; code</div>
+                <div id="canvascopybutton" onclick="demoCanvasCopy()">copy &lt;canvas&gt; code</div>
             </div>
         </div>
     </body>
