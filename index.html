@@ -9,54 +9,69 @@
     </head>
     <body>
         <canvas id="truchettiles"></canvas>
-        <div class="container">
-            <div class="TRT">
-                <img id="truchettitle" src="img/demo/title.svg" alt="truchettiles">
+        <div id="demogrid">
+            <div id="TTT" class="demogriditem">
+                <img id="titleimage" src="img/demo/title.svg">
             </div>
-            <div class="STT">
-                <img id="styletitle" src="img/demo/style.svg" alt="style:">
+            <div id="T01" class="demogriditem">
+                <img class="tileimage" src="img/demo/lowrestiles/t01.png" onclick="tileSelect(this)">
             </div>
-            <div class="S01">
-                <img id="a" src="img/demo/a.svg" alt="a">
+            <div id="T02" class="demogriditem">
+                <img class="tileimage" src="img/demo/lowrestiles/t02.png" onclick="tileSelect(this)">
             </div>
-            <div class="S02">
-                <img id="b" src="img/demo/b.svg" alt="b">
+            <div id="T03" class="demogriditem">
+                <img class="tileimage" src="img/demo/lowrestiles/t03.png" onclick="tileSelect(this)">
             </div>
-            <div class="S03">
-                <img id="c" src="img/demo/c.svg" alt="c">
+            <div id="T04" class="demogriditem">
+                <img class="tileimage" src="img/demo/lowrestiles/t04.png" onclick="tileSelect(this)">
             </div>
-            <div class="S04">
-                <img id="d" src="img/demo/d.svg" alt="d">
+            <div id="T05" class="demogriditem">
+                <img class="tileimage" src="img/demo/lowrestiles/t05.png" onclick="tileSelect(this)">
             </div>
-            <div class="S05">
-                <img id="e" src="img/demo/e.svg" alt="e">
+            <div id="T06" class="demogriditem">
+                <img class="tileimage" src="img/demo/lowrestiles/t06.png" onclick="tileSelect(this)">
             </div>
-            <div class="SZT">
-                <img id="sizetitle" src="img/demo/size.svg" alt="size:">
+            <div id="T07" class="demogriditem">
+                <img class="tileimage" src="img/demo/lowrestiles/t07.png" onclick="tileSelect(this)">
             </div>
-            <div class="SZS">
+            <div id="T08" class="demogriditem">
+                <img class="tileimage tileSelected" src="img/demo/lowrestiles/t08.png" onclick="tileSelect(this)">
+            </div>
+            <div id="T09" class="demogriditem">
+                <img class="tileimage" src="img/demo/lowrestiles/t09.png" onclick="tileSelect(this)">
+            </div>
+            <div id="T10" class="demogriditem">
+                <img class="tileimage" src="img/demo/lowrestiles/t10.png" onclick="tileSelect(this)">
+            </div>
+            <div id="T11" class="demogriditem">
+                <img class="tileimage" src="img/demo/lowrestiles/t11.png" onclick="tileSelect(this)">
+            </div>
+            <div id="T12" class="demogriditem">
+                <img class="tileimage" src="img/demo/lowrestiles/t12.png" onclick="tileSelect(this)">
+            </div>
+            <div id="T13" class="demogriditem">
+                <img class="tileimage" src="img/demo/lowrestiles/t13.png" onclick="tileSelect(this)">
+            </div>
+            <div id="T14" class="demogriditem">
+                <img class="tileimage" src="img/demo/lowrestiles/t14.png" onclick="tileSelect(this)">
+            </div>
+            <div id="T15" class="demogriditem">
+                <img class="tileimage" src="img/demo/lowrestiles/t15.png" onclick="tileSelect(this)">
+            </div>
+            <div id="CL1" class="demogriditem">
+                <input type="text" id="colorinput1" class="colorinput" value="#FFFFFF">
+            </div>
+            <div id="CL2" class="demogriditem">
+                <input type="text" id="colorinput2" class="colorinput" value="#000000">
+            </div>
+            <div id="SZS" class="demogriditem">
                 <input type="range" min="1" max="100" value="50" class="slider" id="sizeslider">
             </div>
-            <div class="C1T">
-                <img id="color1title" src="img/demo/color1.svg" alt="color 1:">
-            </div>
-            <div class="C2T">
-                <img id="color2title" src="img/demo/color2.svg" alt="color 2:">
-            </div>
-            <div class="C1B"></div>
-            <div class="C1S"></div>
-            <div class="C2B"></div>
-            <div class="C2S"></div>
-            <div class="C1H">
-                <input type="text" id="C1H_input" name="C1H_input" value="#000000">
-            </div>
-            <div class="C2H">
-                <input type="text" id="C2H_input" name="C2H_input" value="#FFFFFF">
-            </div>
-            <div class="DWT">
-                <img id="downloadtitle" src="img/demo/download.svg" alt="download:">
+            <div id="CNV" class="demogriditem">
+                <div id="canvascopybutton">copy &lt;canvas&gt; code</div>
             </div>
         </div>
     </body>
     <script src="js/truchettiles.js"></script>
+    <script src="js/index.js"></script>
 </html>
