@@ -36,4 +36,3 @@ The majority of the truchet tile designs I used were taken from this [site](http
 ## Bugs & Improvements
 
 - Create the SVG tiles.
-- Fix Mobile

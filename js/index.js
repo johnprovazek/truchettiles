@@ -16,14 +16,13 @@ function demoTileSelect(element){
     var tiles = document.getElementsByClassName("tileSelected")
     tiles[0].classList.remove("tileSelected")
     element.classList.add("tileSelected")
-    // console.log(element.getAttribute("data-value"))
-    // var truchettiles = document.getElementById("truchettiles")
-    // var style = truchettiles.getAttribute("data-style")
-    // truchettiles.setAttribute("style", element.value);
-    // var color_1 = truchettiles.getAttribute("data-color-1")
-    // var color_2 = truchettiles.getAttribute("data-color-2")
-    // var size = truchettiles.getAttribute("data-size")
-    // tilesInit(style,color_1,color_2,size)
+    var truchettiles = document.getElementById("truchettiles")
+    truchettiles.setAttribute("data-style", element.getAttribute("data-value"));
+    var style = truchettiles.getAttribute("data-style")
+    var color_1 = truchettiles.getAttribute("data-color-1")
+    var color_2 = truchettiles.getAttribute("data-color-2")
+    var size = truchettiles.getAttribute("data-size")
+    tilesInit(style,color_1,color_2,size)
 }
 
 function demoColorChange(element) {

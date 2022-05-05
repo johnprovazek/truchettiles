@@ -1,49 +1,33 @@
 var screenHeight;
 var screenWidth;
+var screenMax
 var numSquares;
-var tile_distance;
+var tileDistance;
 var width_tiles;
 var height_tiles;
 var imgArray = new Array();
 var imgGridArray;
-var cur_mouse_box_x;
-var cur_mouse_box_y;
+cur_mouse_box_x = 20000;
+cur_mouse_box_y = 20000;
 var t01_svg="<circle cx='50' cy='50' r='40' stroke='green' stroke-width='4' fill='yellow' />"
-var t15_svg="<path id='T15_path_1' d='M 24,0 A 24,24 0 0 0 48,24 M 0,24 A 24,24 0 0 1 24,48' style='fill:none;stroke:black;stroke-width:6;stroke-linecap:butt' />"
-
-// window.addEventListener('load', function(event){
-//     tilesInit()
-// });
-
-// window.addEventListener('resize', function(event){
-//     tilesOnResize()
-// });
+var t12_svg='<g id="group"><path class="fillColor" d="M800,1200L800,0h400v400c-110.45695,0-200,89.54305-200,200s89.54305,200,200,200v400h-400Z" style="stroke-width:0;"/><ellipse class="fillColor" rx="400" ry="400" style="stroke-width:0;"/><ellipse class="fillColor" rx="400" ry="400" cy="1200" style="stroke-width:0;"/></g>'
+var t15_svg='<g id="group"><path class="strokeColor" d="M 600,0 A 600,600 0 0 1 0,600 M 1200,600 A 600,600 0 0 0 600,1200" style="fill:none;stroke-width:150;stroke-linecap:butt;" /></g>'
 
 function tilesOnResize() {
     var canvas = document.getElementById("truchettiles");
     var context = canvas.getContext("2d");
-    var scaledWidth = Math.round(window.innerWidth * window.devicePixelRatio)
-    var scaledHeight = Math.round(window.innerHeight * window.devicePixelRatio)
+    var scaledWidth = Math.round(document.documentElement.clientWidth * window.devicePixelRatio)
+    var scaledHeight = Math.round(document.documentElement.clientHeight * window.devicePixelRatio)
     canvas.width = scaledWidth
     canvas.height = scaledHeight
-    for (var i = 0; i < width_tiles; i++) {
-        for (var j = 0; j < height_tiles; j++) {
-            context.drawImage(imgArray[imgGridArray[i][j]], i*tile_distance, j*tile_distance, tile_distance, tile_distance);
+    for (var i = 0; i < numSquares; i++) {
+        for (var j = 0; j < numSquares; j++) {
+            context.drawImage(imgArray[imgGridArray[i][j]], i*tileDistance, j*tileDistance, tileDistance, tileDistance);
         }
     }
 }
 
 function tilesInit(style,color_1,color_2,size) {
-    var canvas = document.getElementById("truchettiles");
-    var context = canvas.getContext("2d");
-    cur_mouse_box_x = 20000;
-    cur_mouse_box_y = 20000;
-    screenHeight = window.screen.height
-    screenWidth = window.screen.width
-    numSquares = size
-    tile_distance = Math.ceil(screenWidth/numSquares)
-    canvas.width = screenWidth
-    canvas.height = screenHeight
     var Counter = 0;
     var TotalImages = 4;
     imgArray[0] = new Image();
@@ -58,7 +42,7 @@ function tilesInit(style,color_1,color_2,size) {
         }
         allLoadedCallback();
     };
-    var onerrorCallback = function(){
+    var onerrorCallback = function(msg){
         Counter++;
         notLoadedImages.push(this);
         if(Counter < TotalImages){
@@ -67,18 +51,34 @@ function tilesInit(style,color_1,color_2,size) {
         allLoadedCallback();
     };
     var allLoadedCallback = function(){
-        width_tiles = Math.ceil(numSquares + 1);
-        height_tiles = Math.ceil(screenHeight/tile_distance + 1);
-        imgGridArray = new Array(width_tiles);
-        for (var i = 0; i < width_tiles; i++) {
-            imgGridArray[i] = new Array(height_tiles);
-            for (var j = 0; j < height_tiles; j++) {
+        var canvas = document.getElementById("truchettiles");
+        var context = canvas.getContext("2d");
+
+        screenHeight = window.screen.height * window.devicePixelRatio
+        screenWidth = window.screen.width * window.devicePixelRatio
+        screenMax = Math.max(screenHeight, screenWidth);
+        numSquares = parseInt(size)
+        var screenTileDistance = Math.ceil(screenMax/numSquares);
+
+        var scaledHeight = Math.round(document.documentElement.clientHeight * window.devicePixelRatio)
+        var scaledWidth = Math.round(document.documentElement.clientWidth * window.devicePixelRatio)
+        var scaledMax = Math.max(scaledWidth, scaledHeight);
+        var scaledTileDistance = Math.ceil(scaledMax/numSquares);
+
+        tileDistance = Math.max(scaledTileDistance, screenTileDistance);
+
+        canvas.width = scaledWidth
+        canvas.height = scaledHeight
+        imgGridArray = new Array(numSquares);
+        for (var i = 0; i < numSquares; i++) {
+            imgGridArray[i] = new Array(numSquares);
+            for (var j = 0; j < numSquares; j++) {
                 imgGridArray[i][j] = tilesGetRandomInt(4)
-                context.drawImage(imgArray[imgGridArray[i][j]], i*tile_distance, j*tile_distance, tile_distance, tile_distance);
+                context.drawImage(imgArray[imgGridArray[i][j]], i*tileDistance, j*tileDistance, tileDistance, tileDistance);
             }
         }
-        tilesOnResize()
     };
+
     imgArray[0].onload = onloadCallback;
     imgArray[1].onload = onloadCallback;
     imgArray[2].onload = onloadCallback;
@@ -87,35 +87,38 @@ function tilesInit(style,color_1,color_2,size) {
     imgArray[1].onerror = onerrorCallback;
     imgArray[2].onerror = onerrorCallback;
     imgArray[3].onerror = onerrorCallback;
-
+    
     svg_el = document.createElementNS("http://www.w3.org/2000/svg", "svg");
-    svg_el.setAttribute("width", "48");
-    svg_el.setAttribute("height", "48");
+    svg_el.setAttribute('xmlns',"http://www.w3.org/2000/svg")
+    svg_el.setAttribute("width", "1200");
+    svg_el.setAttribute("height", "1200");
     svg_el.style.backgroundColor = color_2
-    svg_el.innerHTML = t15_svg;
-    path = svg_el.getElementById('T15_path_1')
-    path.style.stroke = color_1;
+    var svg_html_el = new DOMParser().parseFromString(t12_svg, "text/xml");
+    svg_el.appendChild(svg_html_el.documentElement)
+    group = svg_el.getElementById("group")
 
-    var xml = (new XMLSerializer).serializeToString(svg_el);
-    imgArray[0].src = "data:image/svg+xml;charset=utf-8,"+xml;
+    var fillItems = group.getElementsByClassName("fillColor");
+    for (var i = 0; i < fillItems.length; i++) {
+        console.log(fillItems[i])
+        fillItems[i].setAttribute('style',fillItems[i].getAttribute('style')+'fill:'+color_1)
+    }
 
-    // path.style.stroke = "red";
-    path.setAttribute("transform", "rotate(90)");
-    path.setAttribute("transform-origin", "center");
-    var xml = (new XMLSerializer).serializeToString(svg_el);
-    imgArray[1].src = "data:image/svg+xml;charset=utf-8,"+xml;
+    var strokeItems = group.getElementsByClassName("strokeColor");
+    for (var i = 0; i < strokeItems.length; i++) {
+        console.log(strokeItems[i])
+        strokeItems[i].setAttribute('style',strokeItems[i].getAttribute('style')+'stroke:'+color_1)
+    }
 
-    // path.style.stroke = "blue";
-    path.setAttribute("transform", "rotate(180)");
-    path.setAttribute("transform-origin", "center");
-    var xml = (new XMLSerializer).serializeToString(svg_el);
-    imgArray[2].src = "data:image/svg+xml;charset=utf-8,"+xml;
+    imgArray[0].src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg_el.outerHTML);
 
-    // path.style.stroke = "yellow";
-    path.setAttribute("transform", "rotate(270)");
-    path.setAttribute("transform-origin", "center");
-    var xml = (new XMLSerializer).serializeToString(svg_el);
-    imgArray[3].src = "data:image/svg+xml;charset=utf-8,"+xml;
+    group.setAttribute("transform", "rotate(90,600,600)");
+    imgArray[1].src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg_el.outerHTML);
+
+    group.setAttribute("transform", "rotate(180,600,600)");
+    imgArray[2].src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg_el.outerHTML);
+
+    group.setAttribute("transform", "rotate(270,600,600)");
+    imgArray[3].src = "data:image/svg+xml;charset=utf-8," + encodeURIComponent(svg_el.outerHTML);
 }
 
 function tilesGetRandomInt(max) {
@@ -128,8 +131,8 @@ document.body.addEventListener('mousemove',function(e) {
     var scrollbar_adjustment = (window.innerWidth * window.devicePixelRatio) / (document.body.clientWidth * window.devicePixelRatio)
     var first_x = (e.clientX * window.devicePixelRatio) * scrollbar_adjustment
     var first_y = (e.clientY * window.devicePixelRatio)
-    var x = Math.floor(first_x / tile_distance)
-    var y = Math.floor(first_y / tile_distance)
+    var x = Math.floor(first_x / tileDistance)
+    var y = Math.floor(first_y / tileDistance)
     if(x != cur_mouse_box_x || y != cur_mouse_box_y){
         var style = document.getElementById("truchettiles").getAttribute("data-style")
         if(style == "15" || style == "10"){
@@ -153,8 +156,8 @@ document.body.addEventListener('mousemove',function(e) {
             }
             imgGridArray[x][y] = random_int
         }
-        context.clearRect(x*tile_distance, y*tile_distance, tile_distance, tile_distance);
-        context.drawImage(imgArray[imgGridArray[x][y]], x*tile_distance, y*tile_distance, tile_distance, tile_distance)
+        context.clearRect(x*tileDistance, y*tileDistance, tileDistance, tileDistance);
+        context.drawImage(imgArray[imgGridArray[x][y]], x*tileDistance, y*tileDistance, tileDistance, tileDistance)
         cur_mouse_box_x = x;
         cur_mouse_box_y = y;
     }
