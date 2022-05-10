@@ -8,28 +8,28 @@
         <link rel="stylesheet" href="css/index.css">
     </head>
     <body>
-        <canvas id="truchettiles" data-style="15" data-color-1="#000000" data-color-2="#FFFFFF" data-size="50"></canvas>
+        <canvas id="truchettiles" data-style="15" data-color-1="#FFA500" data-color-2="#FFFFFF" data-size="50"></canvas>
         <div id="demogrid">
             <div id="TTT" class="demogriditem">
                 <img id="titleimage" src="img/demo/title.svg">
             </div>
             <div id="T01" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestileserror/t01.png" data-value="1">
+                <img class="tileimage" src="img/demo/tiles/t01.svg" data-value="1" onclick="demoTileSelect(this)">
             </div>
             <div id="T02" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestileserror/t02.png" data-value="2">
+                <img class="tileimage" src="img/demo/tiles/t02.svg" data-value="2" onclick="demoTileSelect(this)">
             </div>
             <div id="T03" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestileserror/t03.png" data-value="3">
+                <img class="tileimage" src="img/demo/tiles/t03.svg" data-value="3" onclick="demoTileSelect(this)">
             </div>
             <div id="T04" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestileserror/t04.png" data-value="4">
+                <img class="tileimage" src="img/demo/tiles/t04.svg" data-value="4" onclick="demoTileSelect(this)">
             </div>
             <div id="T05" class="demogriditem">
                 <img class="tileimage" src="img/demo/tiles/t05.svg" data-value="5" onclick="demoTileSelect(this)">
             </div>
             <div id="T06" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestileserror/t06.png" data-value="6">
+                <img class="tileimage" src="img/demo/tiles/t06.svg" data-value="6" onclick="demoTileSelect(this)">
             </div>
             <div id="T07" class="demogriditem">
                 <img class="tileimage" src="img/demo/tiles/t07.svg" data-value="7" onclick="demoTileSelect(this)">
@@ -38,7 +38,7 @@
                 <img class="tileimage" src="img/demo/tiles/t08.svg" data-value="8" onclick="demoTileSelect(this)">
             </div>
             <div id="T09" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestileserror/t09.png" data-value="9">
+                <img class="tileimage" src="img/demo/tiles/t09.svg" data-value="9" onclick="demoTileSelect(this)">
             </div>
             <div id="T10" class="demogriditem">
                 <img class="tileimage" src="img/demo/tiles/t10.svg" data-value="10" onclick="demoTileSelect(this)">
@@ -53,16 +53,22 @@
                 <img class="tileimage" src="img/demo/tiles/t13.svg" data-value="13" onclick="demoTileSelect(this)">
             </div>
             <div id="T14" class="demogriditem">
-                <img class="tileimage" src="img/demo/lowrestileserror/t14.png" data-value="14">
+                <img class="tileimage" src="img/demo/tiles/t14.svg" data-value="14" onclick="demoTileSelect(this)">
             </div>
             <div id="T15" class="demogriditem">
                 <img class="tileimage tileSelected" src="img/demo/tiles/t15.svg" data-value="15" onclick="demoTileSelect(this)">
             </div>
             <div id="CL1" class="demogriditem">
-                <input type="text" id="colorinput1" class="colorinput" value="#000000" onchange="demoColorChange(this)">
+                <input type="text" id="colorinput1" class="colorinput" value="#FFA500" onchange="demoColorChange(this)">
             </div>
             <div id="CL2" class="demogriditem">
                 <input type="text" id="colorinput2" class="colorinput" value="#FFFFFF" onchange="demoColorChange(this)">
+            </div>
+            <div id="CL3" class="demogriditem">
+                <input type="text" id="colorinput3" class="colorinput" value="#000000" onchange="demoColorChange(this)">
+            </div>
+            <div id="LTS" class="demogriditem">
+                <input type="range" min="1" max="100" value="50" class="slider" id="linethicknessslider">
             </div>
             <div id="SZS" class="demogriditem">
                 <input type="range" min="1" max="100" value="50" class="slider" id="sizeslider" onchange="demoSizeChange(this)">

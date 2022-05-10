@@ -19,7 +19,7 @@ html{
 #demogrid{  
     background-color: white;
     width: min(95vw,500px);
-    height: min(114vw,600px);
+    height: min(133vw,700px);
     position: absolute;
     left: 50%;
     top: 50%;
@@ -32,7 +32,7 @@ html{
     display: grid;
     border: min(1vw,5px) solid black;
     grid-template-columns: repeat(10, min(9.5vw,50px));
-    grid-template-rows: repeat(12, min(9.5vw,50px));
+    grid-template-rows: repeat(14, min(9.5vw,50px));
     grid-auto-flow: row;
     grid-template-areas:
     "TTT TTT TTT TTT TTT TTT TTT TTT TTT TTT"
@@ -45,6 +45,8 @@ html{
     "T11 T11 T12 T12 T13 T13 T14 T14 T15 T15"
     "CL1 CL1 CL1 CL1 CL1 CL1 CL1 CL1 CL1 CL1"
     "CL2 CL2 CL2 CL2 CL2 CL2 CL2 CL2 CL2 CL2"
+    "CL3 CL3 CL3 CL3 CL3 CL3 CL3 CL3 CL3 CL3"
+    "LTS LTS LTS LTS LTS LTS LTS LTS LTS LTS"
     "SZS SZS SZS SZS SZS SZS SZS SZS SZS SZS"
     "CNV CNV CNV CNV CNV CNV CNV CNV CNV CNV";
 }
@@ -67,7 +69,9 @@ html{
 #T15 { grid-area: T15; }
 #CL1 { grid-area: CL1; }
 #CL2 { grid-area: CL2; }
+#CL3 { grid-area: CL3; }
 #SZS { grid-area: SZS; }
+#LTS { grid-area: LTS; }
 #CNV { grid-area: CNV; }
 
 .demogriditem{
@@ -116,8 +120,8 @@ html{
 .slider::-moz-range-thumb {
     border: none;
     border-radius: 0;
-    width: 30px;
-    height: 30px;
+    width: min(6vw,30px);
+    height: min(6vw,30px);
     background: black;
     cursor: pointer;
 }
