@@ -1,0 +1,20 @@
+<svg 
+    xmlns="http://www.w3.org/2000/svg"
+    width="1200" 
+    height="1200">
+    <g id="group">
+        <path class="fillColor" d="M840,1080c66.27417,0,120,53.72583,120,120h-240c0-66.27417,53.72583-120,120-120Z" style="stroke-width:0;"/>
+        <path class="fillColor" d="M120,360c0,66.27417-53.72583,120-120,120v-240c66.27417,0,120,53.72583,120,120Z" style="stroke-width:0;"/>
+        <path class="fillColor" d="M240,0c0-198.82251,161.17749-360,360-360s360,161.17749,360,360-161.17749,360-360,360-360-161.17749-360-360ZM600,120c66.27417,0,120-53.72583,120-120s-53.72583-120-120-120-120,53.72583-120,120s53.72583,120,120,120Z" style="stroke-width:0;"/>
+        <path class="fillColor" d="M0,720c600,0,800-480,1200-480v240C600,480,400,960,0,960" style="stroke-width:0;"/>
+        <path class="fillColor" d="M240,1200c0-240,560-480,960-480v240c-400,0-720-100-720,240h-240Z" style="stroke-width:0;"/>
+        <path class="strokeColor" d="M720,1200c0-66.27417,53.72583-120,120-120s120,53.72583,120,120" style="fill:none;"/>
+        <path class="strokeColor" d="M0,240c66.27417,0,120,53.72583,120,120s-53.72583,120-120,120" style="fill:none;"/>
+        <path class="strokeColor" d="M960,0c0,198.82251-161.17749,360-360,360s-360-161.17749-360-360" style="fill:none;"/>
+        <path class="strokeColor" d="M480,0c0,66.27417,53.72583,120,120,120s120-53.72583,120-120" style="fill:none;"/>
+        <path class="strokeColor" d="M240,1200c0-240,560-480,960-480" style="fill:none;"/>
+        <path class="strokeColor" d="M1200,960c-400,0-720-100-720,240" style="fill:none;"/>
+        <path class="strokeColor" d="M0,720c600,0,800-480,1200-480" style="fill:none;"/>
+        <path class="strokeColor" d="M1200,480C600,480,400,960,0,960" style="fill:none;"/>
+    </g>
+</svg>

@@ -46,7 +46,7 @@ html{
     "CL1 CL1 CL1 CL1 CL1 CL1 CL1 CL1 CL1 CL1"
     "CL2 CL2 CL2 CL2 CL2 CL2 CL2 CL2 CL2 CL2"
     "CL3 CL3 CL3 CL3 CL3 CL3 CL3 CL3 CL3 CL3"
-    "LTS LTS LTS LTS LTS LTS LTS LTS LTS LTS"
+    "OTS OTS OTS OTS OTS OTS OTS OTS OTS OTS"
     "SZS SZS SZS SZS SZS SZS SZS SZS SZS SZS"
     "CNV CNV CNV CNV CNV CNV CNV CNV CNV CNV";
 }
@@ -71,7 +71,7 @@ html{
 #CL2 { grid-area: CL2; }
 #CL3 { grid-area: CL3; }
 #SZS { grid-area: SZS; }
-#LTS { grid-area: LTS; }
+#OTS { grid-area: OTS; }
 #CNV { grid-area: CNV; }
 
 .demogriditem{

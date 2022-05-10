@@ -1,0 +1,14 @@
+<svg 
+    xmlns="http://www.w3.org/2000/svg"
+    width="1200" 
+    height="1200">
+    <g id="group">
+        <path d="M240,0.00001L1200,960v0v240h-240L0,240L0,0.00001h240Z" fill="#dee1e6" stroke-width="0"/>
+        <path d="M1200,240L960,0.00001h240L1200,240Z" fill="#dee1e6" stroke-width="0"/>
+        <path d="M0,1200v-240l240,240h-240Z" fill="#dee1e6" stroke-width="0"/>
+        <path d="M1200,240L960,0.00001" fill="none" stroke="#000000" stroke-width="30" stroke-linecap="square"/>
+        <path d="M240,0.00001L1200,960v0" fill="none" stroke="#000000" stroke-width="30" stroke-linecap="square"/>
+        <path d="M960,1200L0,240" fill="none" stroke="#000000" stroke-width="30" stroke-linecap="square"/>
+        <path d="M0,960l240,240" fill="none" stroke="#000000" stroke-width="30" stroke-linecap="square"/>
+    </g>
+</svg>

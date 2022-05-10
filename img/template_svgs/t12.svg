@@ -1,0 +1,14 @@
+<svg 
+    xmlns="http://www.w3.org/2000/svg"
+    width="1200" 
+    height="1200">
+    <g id="group">
+        <path class="fillColor" d="M800,1200L800,0h400v400c-110.45695,0-200,89.54305-200,200s89.54305,200,200,200v400h-400Z" style="stroke-width:0;"/>
+        <path class="fillColor" d="M0,0h400C400,220.9139,220.9139,400,0,400L0,0Z" style="stroke-width:0;"/>
+        <path class="fillColor" d="M0,1200v-400c220.9139,0,400,179.0861,400,400h-400Z" style="stroke-width:0;"/>
+        <path class="strokeColor" d="M800,1200L800,0" style="fill:none;"/>
+        <path class="strokeColor" d="M1200,400c-110.45695,0-200,89.54305-200,200s89.54305,200,200,200" style="fill:none;"/>
+        <path class="strokeColor" d="M400,0C400,220.9139,220.9139,400,0,400" style="fill:none;"/>
+        <path class="strokeColor" d="M0,800c220.9139,0,400,179.0861,400,400" style="fill:none;"/>
+    </g>
+</svg>

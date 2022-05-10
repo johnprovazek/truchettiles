@@ -1,0 +1,13 @@
+<svg 
+    xmlns="http://www.w3.org/2000/svg"
+    width="1200" 
+    height="1200">
+    <g id="group">
+        <path class="fillColor" d="M500,1200c0-386.59932,313.40068-700,700-700v200c-276.14237,0-500,223.85763-500,500h-200Z" style="stroke-width:0;"/>
+        <path class="fillColor" d="M700,0C700,386.59932,386.59932,700,0,700v-200C276.14237,500,500,276.14237,500,0h200Z" style="stroke-width:0;"/>
+        <path class="strokeColor" d="M0,500C276.14237,500,500,276.14237,500,0" style="fill:none;"/>
+        <path class="strokeColor" d="M700,0C700,386.59932,386.59932,700,0,700" style="fill:none;"/>
+        <path class="strokeColor" d="M1200,700c-276.14237,0-500,223.85763-500,500" style="fill:none;"/>
+        <path class="strokeColor" d="M500,1200c0-386.59932,313.40068-700,700-700" style="fill:none;"/>
+    </g>
+</svg>
