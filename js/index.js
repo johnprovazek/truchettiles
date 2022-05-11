@@ -13,13 +13,29 @@ window.addEventListener('resize', function(event){
     tilesOnResize()
 });
 
-
-function demoTileSelect(element){
-    var tiles = document.getElementsByClassName("tileSelected")
-    tiles[0].classList.remove("tileSelected")
-    element.classList.add("tileSelected")
+function demoTileSelect(event, element){
     var truchettiles = document.getElementById("truchettiles")
-    truchettiles.setAttribute("data-style", element.getAttribute("data-value"));
+    var style = ""
+    if(!event.ctrlKey){
+        var tiles = document.getElementsByClassName("tileSelected")
+        while (tiles.length) {
+            tiles[0].classList.remove("tileSelected");
+        }
+        element.classList.add("tileSelected")
+        style = element.getAttribute("data-value")
+    }
+    else{
+        element.classList.add("tileSelected")
+        var tiles = document.getElementsByClassName("tileSelected")
+        for (let i = 0; i < tiles.length; i++) {
+            var amp = ""
+            if(i > 0){
+                amp = "&"
+            }
+            style = style + amp + tiles[i].getAttribute("data-value")
+        }
+    }
+    truchettiles.setAttribute("data-style", style);
     var style = truchettiles.getAttribute("data-style")
     var color_1 = truchettiles.getAttribute("data-color-1")
     var color_2 = truchettiles.getAttribute("data-color-2")
@@ -34,12 +50,15 @@ function demoColorChange(element) {
         var truchettiles = document.getElementById("truchettiles")
         if(element.id == "colorinput1"){
             truchettiles.setAttribute("data-color-1", element.value);
+            element.style.backgroundImage = "radial-gradient(circle, #F1F3F4 50%, " + element.value + ")";
         }
         else if(element.id == "colorinput2"){
             truchettiles.setAttribute("data-color-2", element.value);
+            element.style.backgroundImage = "radial-gradient(circle, #F1F3F4 50%, " + element.value + ")";
         }
         else if(element.id == "colorinput3"){
             truchettiles.setAttribute("data-color-3", element.value);
+            element.style.backgroundImage = "radial-gradient(circle, #F1F3F4 50%, " + element.value + ")";
         }
         var style = truchettiles.getAttribute("data-style")
         var color_1 = truchettiles.getAttribute("data-color-1")

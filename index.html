@@ -4,6 +4,7 @@
         <title>truchettiles</title>
         <meta name="viewport" content="width=device-width,initial-scale=1.0">
         <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/truchettiles.css">
         <link rel="stylesheet" href="css/index.css">
     </head>
@@ -11,61 +12,65 @@
         <canvas id="truchettiles" data-style="7" data-color-1="#C41E3A" data-color-2="#0C2340" data-color-3="#FEDB00" data-outline-thickness="50" data-size="12"></canvas>
         <div id="demogrid">
             <div id="TTT" class="demogriditem">
-                <img id="titleimage" src="img/title.svg">
+                <div id="title">truchettiles
+                    <a href="https://github.com/johnprovazek/truchettiles">
+                        <i class="fa fa-github-square" aria-hidden="true"></i>
+                    </a>
+                </div>
             </div>
             <div id="T01" class="demogriditem">
-                <img class="tileimage" src="img/working_demo_svgs/t1.svg" data-value="1" onclick="demoTileSelect(this)">
+                <img class="tileimage" src="img/working_demo_svgs/t1.svg" data-value="1" onclick="demoTileSelect(event,this)">
             </div>
             <div id="T02" class="demogriditem">
-                <img class="tileimage" src="img/working_demo_svgs/t2.svg" data-value="2" onclick="demoTileSelect(this)">
+                <img class="tileimage" src="img/working_demo_svgs/t2.svg" data-value="2" onclick="demoTileSelect(event,this)">
             </div>
             <div id="T03" class="demogriditem">
-                <img class="tileimage" src="img/working_demo_svgs/t3.svg" data-value="3" onclick="demoTileSelect(this)">
+                <img class="tileimage" src="img/working_demo_svgs/t3.svg" data-value="3" onclick="demoTileSelect(event,this)">
             </div>
             <div id="T04" class="demogriditem">
-                <img class="tileimage" src="img/working_demo_svgs/t4.svg" data-value="4" onclick="demoTileSelect(this)">
+                <img class="tileimage" src="img/working_demo_svgs/t4.svg" data-value="4" onclick="demoTileSelect(event,this)">
             </div>
             <div id="T05" class="demogriditem">
-                <img class="tileimage" src="img/working_demo_svgs/t5.svg" data-value="5" onclick="demoTileSelect(this)">
+                <img class="tileimage" src="img/working_demo_svgs/t5.svg" data-value="5" onclick="demoTileSelect(event,this)">
             </div>
             <div id="T06" class="demogriditem">
-                <img class="tileimage" src="img/working_demo_svgs/t6.svg" data-value="6" onclick="demoTileSelect(this)">
+                <img class="tileimage" src="img/working_demo_svgs/t6.svg" data-value="6" onclick="demoTileSelect(event,this)">
             </div>
             <div id="T07" class="demogriditem">
-                <img class="tileimage tileSelected" src="img/working_demo_svgs/t7.svg" data-value="7" onclick="demoTileSelect(this)">
+                <img class="tileimage tileSelected" src="img/working_demo_svgs/t7.svg" data-value="7" onclick="demoTileSelect(event,this)">
             </div>
             <div id="T08" class="demogriditem">
-                <img class="tileimage" src="img/working_demo_svgs/t8.svg" data-value="8" onclick="demoTileSelect(this)">
+                <img class="tileimage" src="img/working_demo_svgs/t8.svg" data-value="8" onclick="demoTileSelect(event,this)">
             </div>
             <div id="T09" class="demogriditem">
-                <img class="tileimage" src="img/working_demo_svgs/t9.svg" data-value="9" onclick="demoTileSelect(this)">
+                <img class="tileimage" src="img/working_demo_svgs/t9.svg" data-value="9" onclick="demoTileSelect(event,this)">
             </div>
             <div id="T10" class="demogriditem">
-                <img class="tileimage" src="img/working_demo_svgs/t10.svg" data-value="10" onclick="demoTileSelect(this)">
+                <img class="tileimage" src="img/working_demo_svgs/t10.svg" data-value="10" onclick="demoTileSelect(event,this)">
             </div>
             <div id="T11" class="demogriditem">
-                <img class="tileimage" src="img/working_demo_svgs/t11.svg" data-value="11" onclick="demoTileSelect(this)">
+                <img class="tileimage" src="img/working_demo_svgs/t11.svg" data-value="11" onclick="demoTileSelect(event,this)">
             </div>
             <div id="T12" class="demogriditem">
-                <img class="tileimage" src="img/working_demo_svgs/t12.svg" data-value="12" onclick="demoTileSelect(this)">
+                <img class="tileimage" src="img/working_demo_svgs/t12.svg" data-value="12" onclick="demoTileSelect(event,this)">
             </div>
             <div id="T13" class="demogriditem">
-                <img class="tileimage" src="img/working_demo_svgs/t13.svg" data-value="13" onclick="demoTileSelect(this)">
+                <img class="tileimage" src="img/working_demo_svgs/t13.svg" data-value="13" onclick="demoTileSelect(event,this)">
             </div>
             <div id="T14" class="demogriditem">
-                <img class="tileimage" src="img/working_demo_svgs/t14.svg" data-value="14" onclick="demoTileSelect(this)">
+                <img class="tileimage" src="img/working_demo_svgs/t14.svg" data-value="14" onclick="demoTileSelect(event,this)">
             </div>
             <div id="T15" class="demogriditem">
-                <img class="tileimage" src="img/working_demo_svgs/t15.svg" data-value="15" onclick="demoTileSelect(this)">
+                <img class="tileimage" src="img/working_demo_svgs/t15.svg" data-value="15" onclick="demoTileSelect(event,this)">
             </div>
             <div id="CL1" class="demogriditem">
-                <input type="text" id="colorinput1" class="colorinput" value="#C41E3A" onchange="demoColorChange(this)">
+                <input type="text" id="colorinput1" class="colorinput" value="#C41E3A" style="background-image: radial-gradient(circle, #F1F3F4 50%, #C41E3A)" onchange="demoColorChange(this)">
             </div>
             <div id="CL2" class="demogriditem">
-                <input type="text" id="colorinput2" class="colorinput" value="#0C2340" onchange="demoColorChange(this)">
+                <input type="text" id="colorinput2" class="colorinput" value="#0C2340" style="background-image: radial-gradient(circle, #F1F3F4 50%, #0C2340)" onchange="demoColorChange(this)">
             </div>
             <div id="CL3" class="demogriditem">
-                <input type="text" id="colorinput3" class="colorinput" value="#FEDB00" onchange="demoColorChange(this)">
+                <input type="text" id="colorinput3" class="colorinput" value="#FEDB00" style="background-image: radial-gradient(circle, #F1F3F4 50%, #FEDB00)" onchange="demoColorChange(this)">
             </div>
             <div id="OTS" class="demogriditem">
                 <input type="range" min="0" max="100" value="50" class="slider" id="outlinethicknessslider" onchange="demoSizeChange(this)">

@@ -6,9 +6,9 @@
         <path d="M800,1200L800,0h400v400c-110.45695,0-200,89.54305-200,200s89.54305,200,200,200v400h-400Z" fill="#dee1e6" stroke-width="0"/>
         <path d="M0,0h400C400,220.9139,220.9139,400,0,400L0,0Z" fill="#dee1e6" stroke-width="0"/>
         <path d="M0,1200v-400c220.9139,0,400,179.0861,400,400h-400Z" fill="#dee1e6" stroke-width="0"/>
-        <path d="M800,1200L800,0" fill="none" stroke="#000000" stroke-width="30"/>
-        <path d="M1200,400c-110.45695,0-200,89.54305-200,200s89.54305,200,200,200" fill="none" stroke="#000000" stroke-width="30"/>
-        <path d="M400,0C400,220.9139,220.9139,400,0,400" fill="none" stroke="#000000" stroke-width="30"/>
-        <path d="M0,800c220.9139,0,400,179.0861,400,400" fill="none" stroke="#000000" stroke-width="30"/>
+        <path d="M800,1200L800,0" fill="none" stroke="#292F33" stroke-width="30"/>
+        <path d="M1200,400c-110.45695,0-200,89.54305-200,200s89.54305,200,200,200" fill="none" stroke="#292F33" stroke-width="30"/>
+        <path d="M400,0C400,220.9139,220.9139,400,0,400" fill="none" stroke="#292F33" stroke-width="30"/>
+        <path d="M0,800c220.9139,0,400,179.0861,400,400" fill="none" stroke="#292F33" stroke-width="30"/>
     </g>
 </svg>

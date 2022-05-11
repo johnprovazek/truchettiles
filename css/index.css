@@ -17,7 +17,7 @@ html{
 }
 
 #demogrid{  
-    background-color: white;
+    background-color: #F1F3F4;
     width: min(95vw,500px);
     height: min(133vw,700px);
     position: absolute;
@@ -26,11 +26,11 @@ html{
     -webkit-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     text-align: center;
-    box-shadow: 0 0 50px 50px #fff;
-    -webkit-box-shadow: 0 0 50px 50px #fff;
-    -moz-box-shadow: 0 0 50px 50px #fff;
+    box-shadow: 0 0 50px 50px #F1F3F4;
+    -webkit-box-shadow: 0 0 50px 50px #F1F3F4;
+    -moz-box-shadow: 0 0 50px 50px #F1F3F4;
     display: grid;
-    border: min(1vw,5px) solid black;
+    border: min(1vw,5px) solid #292F33;
     grid-template-columns: repeat(10, min(9.5vw,50px));
     grid-template-rows: repeat(14, min(9.5vw,50px));
     grid-auto-flow: row;
@@ -85,6 +85,8 @@ html{
 }
 
 .colorinput{
+    color: #292F33;
+    border-radius: 0;
     box-sizing: border-box;
     -webkit-appearance: none;
     outline: none;
@@ -94,17 +96,20 @@ html{
     width:100%;
     height:100%;
     font-size: 100%;
-    border:min(1vw,5px) solid black;
+    border:min(1vw,5px) solid #292F33;
     padding: 0;
+    /* background-image: radial-gradient(circle, white 50%, yellow); */
 }
 
 .slider {
+    background-color: #F1F3F4;
+    border-radius: 0;
     box-sizing: border-box;
     -webkit-appearance: none;
     width: 100%;
     height: 100%;
     margin:0;
-    border:min(1vw,5px) solid black;
+    border:min(1vw,5px) solid #292F33;
     outline: none;
 }
 
@@ -113,7 +118,7 @@ html{
     appearance: none;
     width: min(6vw,30px);
     height: min(6vw,30px);
-    background: black;
+    background: #292F33;
     cursor: pointer;
 }
 
@@ -122,11 +127,13 @@ html{
     border-radius: 0;
     width: min(6vw,30px);
     height: min(6vw,30px);
-    background: black;
+    background: #292F33;
     cursor: pointer;
 }
 
 #canvascopybutton {
+    color:#292F33;
+    background-color: #F1F3F4;
     box-sizing: border-box;
     -webkit-appearance: none;
     outline: none;
@@ -136,7 +143,7 @@ html{
     height:100%;
     font-size: 100%;
     line-height: min(6vw,30px);
-    border:min(1vw,5px) solid black;
+    border:min(1vw,5px) solid #292F33;
     padding: 0;
 }
 
@@ -145,18 +152,19 @@ html{
 }
 
 @keyframes tileSelectedHighlight {
-    0%   {outline-color:black;}
+    0%   {outline-color:#292F33;}
     50%  {outline-color:white;}
-    100% {outline-color:black;}
+    100% {outline-color:#292F33;}
 }
 
 .tileSelected{
     outline-width: min(1vw,5px);
     outline-offset: max(-1vw,-5px);
     outline-style: solid;
-    animation-name: tileSelectedHighlight;
+    outline-color:#292F33;
+    /* animation-name: tileSelectedHighlight;
     animation-duration: 1s;
-    animation-iteration-count: infinite;
+    animation-iteration-count: infinite; */
 }
 
 #canvascopybutton{
@@ -167,3 +175,19 @@ html{
     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=);
 }
 
+a {
+    color: #292f33;
+}
+
+#title{
+    height: min(19vw,100px);
+    line-height: min(19vw,100px);
+    text-align: center;
+    font-size: min(9.5vw,50px);
+    font-weight: bold;
+    /* display: block; */
+    /* margin: auto; */
+    /* width: 50%; */
+    /* box-sizing: border-box; */
+    color: #292f33;
+}
