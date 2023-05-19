@@ -147,10 +147,6 @@ html{
     padding: 0;
 }
 
-#titleimage{
-    height:100%;
-}
-
 @keyframes tileSelectedHighlight {
     0%   {outline-color:#292F33;}
     50%  {outline-color:white;}
@@ -183,11 +179,16 @@ a {
     height: min(19vw,100px);
     line-height: min(19vw,100px);
     text-align: center;
-    font-size: min(9.5vw,50px);
+    font-size: min(9.5vw,40px);
     font-weight: bold;
-    /* display: block; */
-    /* margin: auto; */
-    /* width: 50%; */
-    /* box-sizing: border-box; */
     color: #292f33;
 }
+
+.colorError {
+  /* border: min(1vw,5px) solid red; */
+  animation: blink 0.25s;
+  animation-iteration-count: 3;
+  
+}
+
+@keyframes blink { 50% { border-color:red ; }  }

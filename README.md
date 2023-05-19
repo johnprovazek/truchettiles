@@ -10,12 +10,12 @@ Built using vanilla JavaScript utilizing the `<canvas>` element.
 
 To utilize truchet tiles in your own project start by placing a `<canvas>` element with the id "truchettiles" within the body of your html file. There are six attributes that need to be added to the `<canvas>` element to properly setup the truchet tiles.
 
-- `data-style` is the style of tile you would like to use. This value should be either in the range 1-15 or styles could be combined with the "&" as a delimiter.
+- `data-style` is the style of tile you would like to use. This value should be either in the range 1-15 or styles could be combined with "&" as a delimiter.
 - `data-color-1` is the main color of the tile. This could be represented as "#FFFFFF", "red", or "rgb(100,200,100)" for example. 
 - `data-color-2` is the background color of the tile. This could be represented as "#FFFFFF", "red", or "rgb(100,200,100)" for example. 
 - `data-color-2` is the color of the shape outline. This could be represented as "#FFFFFF", "red", or "rgb(100,200,100)" for example. 
 - `data-outline-thickness` is the size of the outline thickness. This needs to be in the range 0-100. A "0" thickness would represent no outline.
-- `data-size` is the size of the tiles. This needs to be in the range 1-100
+- `data-size` is the size of the tiles. This needs to be in the range 1-50
 
 Here's an example `<canvas>` element with the attributes filled out:
 ```
@@ -35,7 +35,10 @@ The majority of the truchet tile designs I used were taken from this [website](h
 
 ## Bugs & Improvements
 
-- Develop a function to randomize the attributes on the demo website so every page refresh generates a new design.
-- Add "Control + Click" ability to deselect tile in a group.
-- Add an info option that when hovered over gives the user instructions.
-- Use a linter and a style guide. 
+- Add an info option to give the user instructions
+- Improve mobile scaling
+- Fix mobile stretch issue
+- Can't select multiple tiles on mobile
+- Maybe move some of the demo functionality to truchettiles.js
+- Consider creating a React Component setup for truchettiles
+- Use a linter and a style guide
