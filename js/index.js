@@ -1,56 +1,92 @@
-var demo_truchet_tiles_element = document.getElementById("truchettiles")
-var demo_style = demo_truchet_tiles_element.getAttribute("data-style")
-var demo_color_1 = demo_truchet_tiles_element.getAttribute("data-color-1")
-var demo_color_2 = demo_truchet_tiles_element.getAttribute("data-color-2")
-var demo_color_3 = demo_truchet_tiles_element.getAttribute("data-color-3")
-var demo_thickness = demo_truchet_tiles_element.getAttribute("data-outline-thickness")
-var demo_size = demo_truchet_tiles_element.getAttribute("data-size")
-
-// Calls tilesLoad
-function demoLoadTiles(){
-  // Adding and removing tileSelected class to highlight the tiles selected
-  let tiles = document.getElementsByClassName("tileSelected")
+function demoSetStyle(style, load){
+  // Adding and removing tile-selected class to highlight the tiles selected
+  let tiles = document.getElementsByClassName('tile-selected')
   while (tiles.length) {
-    tiles[0].classList.remove("tileSelected");
+    tiles[0].classList.remove('tile-selected');
   }
-  let s_tiles = demo_style.split('&');
-  for (let i = 0; i < s_tiles.length; i++) {
-    document.getElementById('tile_image_' + s_tiles[i]).classList.add("tileSelected")
+  let tileStyles = style.split('&');
+  for (let i = 0; i < tileStyles.length; i++) {
+    document.getElementById('tile-image-' + tileStyles[i]).classList.add('tile-selected')
   }
-
-  // Modifying the color selection background and value to match the color selected
-  let colorinput1_element = document.getElementById('colorinput1')
-  colorinput1_element.style.backgroundImage = "radial-gradient(circle, #F1F3F4 50%, " + demo_color_1 + ")";
-  colorinput1_element.style.borderColor = "#292F33"
-  colorinput1_element.value = demo_color_1
-  let colorinput2_element = document.getElementById('colorinput2')
-  colorinput2_element.style.backgroundImage = "radial-gradient(circle, #F1F3F4 50%, " + demo_color_2 + ")";
-  colorinput2_element.style.borderColor = "#292F33"
-  colorinput2_element.value = demo_color_2
-  let colorinput3_element = document.getElementById('colorinput3')
-  colorinput3_element.style.backgroundImage = "radial-gradient(circle, #F1F3F4 50%, " + demo_color_3 + ")";
-  colorinput3_element.style.borderColor = "#292F33"
-  colorinput3_element.value = demo_color_3
-
-  // Adjusting the sliders
-  let thickness_slider_element = document.getElementById('outlinethicknessslider')
-  thickness_slider_element.value = demo_thickness
-  let sizes_slider_element = document.getElementById('sizeslider')
-  sizes_slider_element.value = demo_size
-
-  tilesLoad(demo_style,demo_color_1,demo_color_2,demo_color_3,demo_thickness,demo_size)
+  tilesSetStyle(style)
+  if(load){
+    tilesLoad()
+  }
 }
 
-// Randomizing function
-function demoGetRandInt(min, max) { // min and max included 
-  return Math.floor(Math.random() * (max - min + 1) + min)
+function demoSetColor1(color, load){
+  // Modifying the color selection background and value to match the color selected
+  let colorInput1Element = document.getElementById('color-input-1')
+  colorInput1Element.style.backgroundImage = "radial-gradient(circle, #F1F3F4 50%, " + color + ")";
+  colorInput1Element.style.borderColor = "#292F33"
+  colorInput1Element.value = color;
+  colorInput1Element.setAttribute('data-value', color);
+  tilesSetColor1(color)
+  if(load){
+    tilesLoad()
+  }
+}
+
+function demoSetColor2(color, load){
+  // Modifying the color selection background and value to match the color selected
+  let colorInput2Element = document.getElementById('color-input-2')
+  colorInput2Element.style.backgroundImage = "radial-gradient(circle, #F1F3F4 50%, " + color + ")";
+  colorInput2Element.style.borderColor = "#292F33"
+  colorInput2Element.value = color;
+  colorInput2Element.setAttribute('data-value', color);
+  tilesSetColor2(color)
+  if(load){
+    tilesLoad()
+  }
+}
+
+function demoSetColor3(color, load){
+  // Modifying the color selection background and value to match the color selected
+  let colorInput3Element = document.getElementById('color-input-3')
+  colorInput3Element.style.backgroundImage = "radial-gradient(circle, #F1F3F4 50%, " + color + ")";
+  colorInput3Element.style.borderColor = "#292F33"
+  colorInput3Element.value = color;
+  colorInput3Element.setAttribute('data-value', color);
+  tilesSetColor3(color)
+  if(load){
+    tilesLoad()
+  }
+}
+
+function demoSetThickness(thickness, load){
+  // Setting the slider value
+  document.getElementById('outline-thickness-slider').value = thickness
+  tilesSetThickness(thickness)
+  if(load){
+    tilesLoad()
+  }
+}
+
+function demoSetSize(size, load){
+  // Setting the slider value
+  document.getElementById('size-slider').value = size
+  tilesSetSize(size)
+  if(load){
+    tilesLoad()
+  }
+}
+
+function demoLoadAllTiles(tilesStyle,tilesColor1,tilesColor2,tilesColor3,tilesThickness,tilesSize){
+  demoSetStyle(tilesStyle, false);
+  demoSetColor1(tilesColor1, false);
+  demoSetColor2(tilesColor2, false);
+  demoSetColor3(tilesColor3, false);
+  demoSetThickness(tilesThickness, false);
+  demoSetSize(tilesSize, false);
+  tilesLoad();
 }
 
 // Pseudo-randomize values for the truchet tiles demo page
 function demoRandomize(){
   // Setting demo tile style
+  let tilesRandStyle;
   if (demoGetRandInt(1,100) > 15){ // 85% of the time show individual tile styles
-    demo_style = String(demoGetRandInt(1,15))
+    tilesRandStyle = String(demoGetRandInt(1,15))
   }
   else{ // 15% of the time show multiple tile styles 
     let s = demoGetRandInt(5,15)
@@ -68,7 +104,7 @@ function demoRandomize(){
       lowerLimit = 11
       upperLimit = 15
     }
-    demo_style = String(s)
+    newDemoStyle = String(s)
     let sArr = []
     for (let i = lowerLimit; i <= upperLimit; i++) {
       if(i != s){
@@ -78,128 +114,145 @@ function demoRandomize(){
     let randMultiple = demoGetRandInt(1,sArr.length)
     for (let i = 0; i < randMultiple; i++) {
       let randIndex = demoGetRandInt(0,sArr.length-1)
-      demo_style = demo_style + '&' + String(sArr.splice(randIndex, 1)[0])
+      newDemoStyle = newDemoStyle + '&' + String(sArr.splice(randIndex, 1)[0])
     }
+    tilesRandStyle = newDemoStyle
   }
 
   // Setting demo tile colors
-  demo_color_1 = '#' + Math.floor(Math.random()*16777215).toString(16);
-  demo_color_2 = '#' + Math.floor(Math.random()*16777215).toString(16);
-  demo_color_3 = '#' + Math.floor(Math.random()*16777215).toString(16);
+  let tilesRandColor1 = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,0);
+  let tilesRandColor2 = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,0);
+  let tilesRandColor3 = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,0);
 
   // Setting demo tile outline thickness
+  let tilesRandThickness;
   if (demoGetRandInt(1,100) > 15){ // 85% of the time pick a random outline thickness from 25-100
-    demo_thickness = String(demoGetRandInt(25,100))
+    tilesRandThickness = String(demoGetRandInt(25,100));
   }
   else{ // 15% of the time show no outline
-    demo_thickness = "0"
+    tilesRandThickness = '0';
   }
 
   // Setting demo tile size
+  let tilesRandSize;
   if (demoGetRandInt(1,100) > 15){ // 85% of the time pick a data size between 5 and 15
-    demo_size = String(demoGetRandInt(6,15))
+    tilesRandSize = String(demoGetRandInt(5,15))
   }
   else{ // 15% of the time pick a data size between 1-5 or 16-50
     let r_size = demoGetRandInt(1,40)
     if (r_size >= 6 && r_size <= 15){
       r_size = r_size + 10
     }
-    demo_size = String(r_size)
+    tilesRandSize = String(r_size)
   }
-
-  // Load the new tiles
-  demoLoadTiles()
+  demoLoadAllTiles(tilesRandStyle,tilesRandColor1,tilesRandColor2,tilesRandColor3,tilesRandThickness,tilesRandSize)
 }
+
+// Overwrites Context Menu for touching image on mobile
+function demoTilesPreventContextMenuMobile(event){
+  event.preventDefault()
+  return false;
+}
+
+// Handles selecting tiles on the demo page on mobile
+document.getElementById("tiles-wrapper").addEventListener('touchstart', function (e) {
+  e.preventDefault() // Turns off onclick event
+  if(e.touches.length === 1){
+    demoTileChange(e, e.touches[0].target, false)
+  }
+  else if(e.touches.length > 1 && e.touches[0].target.classList.contains('tile-selected')) {
+    console.log()
+    demoTileChange(e, e.touches[1].target, true)
+  }
+});
 
 // Handle selecting tiles on the demo page
 function demoTileSelect(event, element){
-  if(!event.ctrlKey){
-    demo_style = element.getAttribute("data-value")
-    demoLoadTiles()
+  demoTileChange(event,element,event.ctrlKey)
+}
+
+// Handle changing tiles on the demo page
+function demoTileChange(event, element, multiple){
+  if(!multiple){ // selecting one tile
+    demoSetStyle(element.getAttribute('data-value'), true)
   }
-  else{
-    let element_style = element.getAttribute("data-value")
-    let s_tiles = demo_style.split('&');
-    let new_tile = true
-    for (let i = 0; i < s_tiles.length; i++) {
-      if(element_style === s_tiles[i]){
-        new_tile = false
-        if(s_tiles.length > 1){
-          s_tiles.splice(i, 1);
-          demo_style = s_tiles.join("&");
-          demoLoadTiles()
+  else{ // selecting multiple tiles
+    let elementStyle = element.getAttribute('data-value')
+    let selectedTiles = document.getElementsByClassName('tile-selected');
+    let selectedStyles = Array.from(selectedTiles).map(x => x.getAttribute('data-value'))
+    let newTile = true
+    let newStyle = ''
+    // Checking to see if selecting a tile already selected
+    for (let i = 0; i < selectedStyles.length; i++) {
+      if(elementStyle === selectedStyles[i]){
+        newTile = false
+        if(selectedStyles.length > 1){ // Remove tile already selected
+          selectedStyles.splice(i, 1);
+          newStyle = selectedStyles.join("&");
+          demoSetStyle(newStyle, true)
         }
         break;
       }
     }
-    if (new_tile){
-      demo_style = demo_style + '&' + element.getAttribute('data-value')
-      demoLoadTiles()
+    if (newTile){ // Adding new tile
+      selectedStyles.push(elementStyle)
+      newStyle = selectedStyles.join("&");
+      demoSetStyle(newStyle, true)
     }
   }
 }
 
 // Handles all the color input fields
 function demoColorChange(element) {
-  console.log("here")
   let styleTest = new Option().style;
   styleTest.color = element.value;
   let isColor =  styleTest.color !== '';
   if(isColor){ // Checks if input is valid color
-    if(element.id == "colorinput1"){
-      demo_color_1 = element.value
+    if(element.id == "color-input-1"){
+      demoSetColor1(element.value, true)
     }
-    else if(element.id == "colorinput2"){
-      demo_color_2 = element.value
+    else if(element.id == "color-input-2"){
+      demoSetColor2(element.value, true)
     }
-    else if(element.id == "colorinput3"){
-      demo_color_3 = element.value
+    else if(element.id == "color-input-3"){
+      demoSetColor3(element.value, true)
     }
-    demoLoadTiles()
-    element.style.borderColor = "#292F33"
   }
-  else{ // Error flash if input is invalid color
+  else{ // Show error color if input is invalid color
     element.style.borderColor = "#cc0000"
   }
 }
 
 // Handles when a demo color input field is out of focus. Resets element value to the last valid demo color.
 function demoColorFocusOut(element){
-  if(element.id == "colorinput1"){
-    element.value = demo_color_1
-  }
-  else if(element.id == "colorinput2"){
-    element.value = demo_color_2
-  }
-  else if(element.id == "colorinput3"){
-    element.value = demo_color_3
-  }
+  element.value = element.getAttribute('data-value')
   element.style.borderColor = "#292F33"
 }
 
 // Handles changes in the slider fields
 function demoSliderChange(element) {
-  if(element.id == "outlinethicknessslider"){
-    demo_thickness = element.value
+  if(element.id == "outline-thickness-slider"){
+    demoSetThickness(element.value, true)
   }
-  else if(element.id == "sizeslider"){
-    demo_size = element.value
+  else if(element.id == "size-slider"){
+    demoSetSize(element.value, true)
   }
-  demoLoadTiles()
 }
 
 function demoCanvasCopy(){
-  var html_string = "<canvas id=\"demo_truchet_tiles_element\" data-style=\"" + demo_style + "\" data-color-1=\"" + demo_color_1 + "\" data-color-2=\"" + demo_color_2 + "\" data-color-3=\"" + demo_color_3 + "\" data-outline-thickness=\"" + demo_thickness + "\" data-size=\"" + demo_size + "\"></canvas>"
+  let canvasElement = document.getElementById('truchet-tiles')
+  let html_string = "<canvas id=\"truchet-tiles\" " + 
+                      "data-style=\"" + canvasElement.getAttribute('data-style') + "\" " +
+                      "data-color-1=\"" + canvasElement.getAttribute('data-color-1') + "\" " + 
+                      "data-color-2=\"" + canvasElement.getAttribute('data-color-2') + "\" " + 
+                      "data-color-3=\"" + canvasElement.getAttribute('data-color-3') + "\" " + 
+                      "data-outline-thickness=\"" + canvasElement.getAttribute('data-outline-thickness') + "\" " + 
+                      "data-size=\"" + canvasElement.getAttribute('data-size') + "\" " + 
+                    "></canvas>"
   navigator.clipboard.writeText(html_string);
 }
 
-
-// element.animate(
-//   {
-//     borderColor: ["red", "black"],
-//   },
-//   {
-//     duration: 200,
-//     iterations: 3,
-//   }
-// );
+// Helper function to randomize int value between min and max inclusive
+function demoGetRandInt(min, max) {
+  return Math.floor(Math.random() * (max - min + 1) + min)
+}

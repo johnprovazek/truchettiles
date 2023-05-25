@@ -8,7 +8,7 @@ Built using vanilla JavaScript utilizing the `<canvas>` element.
 
 ## Installation
 
-To utilize truchet tiles in your own project start by placing a `<canvas>` element with the id "truchettiles" within the body of your html file. There are six attributes that need to be added to the `<canvas>` element to properly setup the truchet tiles.
+To utilize truchet tiles in your own project start by placing a `<canvas>` element with the id "truchet-tiles" within the body of your html file. There are six attributes that need to be added to the `<canvas>` element to properly setup the truchet tiles.
 
 - `data-style` is the style of tile you would like to use. This value should be either in the range 1-15 or styles could be combined with "&" as a delimiter.
 - `data-color-1` is the main color of the tile. This could be represented as "#FFFFFF", "red", or "rgb(100,200,100)" for example. 
@@ -19,7 +19,7 @@ To utilize truchet tiles in your own project start by placing a `<canvas>` eleme
 
 Here's an example `<canvas>` element with the attributes filled out:
 ```
-<canvas id="truchettiles" data-style="7" data-color-1="#C41E3A" data-color-2="#0C2340" data-color-3="#FEDB00" data-outline-thickness="50" data-size="12"></canvas>
+<canvas id="truchet-tiles" data-style="7" data-color-1="#C41E3A" data-color-2="#0C2340" data-color-3="#FEDB00" data-outline-thickness="50" data-size="12"></canvas>
 ```
 You can use the [demo](https://www.johnprovazek.com/truchettiles/) to test out different configurations. In the demo there is a button that can be used to copy the configuration to your project.
 
@@ -35,10 +35,7 @@ The majority of the truchet tile designs I used were taken from this [website](h
 
 ## Bugs & Improvements
 
-- Add an info option to give the user instructions
-- Improve mobile scaling
-- Fix mobile stretch issue
-- Can't select multiple tiles on mobile
-- Maybe move some of the demo functionality to truchettiles.js
-- Consider creating a React Component setup for truchettiles
-- Use a linter and a style guide
+- Add an info option to demo page to give the user instructions.
+- Consider offering a React component of truchettiles.
+- Configure truchettiles code to only reload canvas when style is changed.
+- Use a linter and a style guide.

@@ -4,7 +4,7 @@ body{
     width: 100vw;
 }
 
-#truchettiles{
+#truchet-tiles{
     position: fixed;
     z-index:-1;
     box-sizing: border-box;

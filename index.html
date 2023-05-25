@@ -1,89 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <title>truchettiles</title>
-        <meta name="viewport" content="width=device-width,initial-scale=1.0">
-        <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-        <link rel="stylesheet" href="css/truchettiles.css">
-        <link rel="stylesheet" href="css/index.css">
-    </head>
-    <body>
-        <canvas id="truchettiles" data-style="7" data-color-1="#C41E3A" data-color-2="#0C2340" data-color-3="#FEDB00" data-outline-thickness="50" data-size="12"></canvas>
-        <div id="demogrid">
-            <div id="TTT" class="demogriditem">
-                <div id="title">
-                  <span>truchettiles</span>
-                  <a href="https://github.com/johnprovazek/truchettiles"><i class="fa fa-github-square" aria-hidden="true"></i></a>
-                  <i id="randomize" class="fa fa-refresh" aria-hidden="true" onclick="demoRandomize()"></i>
-                  <i class="fa fa-question-circle" aria-hidden="true"></i>
-                </div>
-            </div>
-            <div id="T01" class="demogriditem">
-                <img id="tile_image_1" class="tileimage" src="img/working_demo_svgs/t1.svg" data-value="1" onclick="demoTileSelect(event,this)">
-            </div>
-            <div id="T02" class="demogriditem">
-                <img id="tile_image_2" class="tileimage" src="img/working_demo_svgs/t2.svg" data-value="2" onclick="demoTileSelect(event,this)">
-            </div>
-            <div id="T03" class="demogriditem">
-                <img id="tile_image_3" class="tileimage" src="img/working_demo_svgs/t3.svg" data-value="3" onclick="demoTileSelect(event,this)">
-            </div>
-            <div id="T04" class="demogriditem">
-                <img id="tile_image_4" class="tileimage" src="img/working_demo_svgs/t4.svg" data-value="4" onclick="demoTileSelect(event,this)">
-            </div>
-            <div id="T05" class="demogriditem">
-                <img id="tile_image_5" class="tileimage" src="img/working_demo_svgs/t5.svg" data-value="5" onclick="demoTileSelect(event,this)">
-            </div>
-            <div id="T06" class="demogriditem">
-                <img id="tile_image_6" class="tileimage" src="img/working_demo_svgs/t6.svg" data-value="6" onclick="demoTileSelect(event,this)">
-            </div>
-            <div id="T07" class="demogriditem">
-                <img id="tile_image_7" class="tileimage tileSelected" src="img/working_demo_svgs/t7.svg" data-value="7" onclick="demoTileSelect(event,this)">
-            </div>
-            <div id="T08" class="demogriditem">
-                <img id="tile_image_8" class="tileimage" src="img/working_demo_svgs/t8.svg" data-value="8" onclick="demoTileSelect(event,this)">
-            </div>
-            <div id="T09" class="demogriditem">
-                <img id="tile_image_9" class="tileimage" src="img/working_demo_svgs/t9.svg" data-value="9" onclick="demoTileSelect(event,this)">
-            </div>
-            <div id="T10" class="demogriditem">
-                <img id="tile_image_10" class="tileimage" src="img/working_demo_svgs/t10.svg" data-value="10" onclick="demoTileSelect(event,this)">
-            </div>
-            <div id="T11" class="demogriditem">
-                <img id="tile_image_11" class="tileimage" src="img/working_demo_svgs/t11.svg" data-value="11" onclick="demoTileSelect(event,this)">
-            </div>
-            <div id="T12" class="demogriditem">
-                <img id="tile_image_12" class="tileimage" src="img/working_demo_svgs/t12.svg" data-value="12" onclick="demoTileSelect(event,this)">
-            </div>
-            <div id="T13" class="demogriditem">
-                <img id="tile_image_13" class="tileimage" src="img/working_demo_svgs/t13.svg" data-value="13" onclick="demoTileSelect(event,this)">
-            </div>
-            <div id="T14" class="demogriditem">
-                <img id="tile_image_14" class="tileimage" src="img/working_demo_svgs/t14.svg" data-value="14" onclick="demoTileSelect(event,this)">
-            </div>
-            <div id="T15" class="demogriditem">
-                <img id="tile_image_15" class="tileimage" src="img/working_demo_svgs/t15.svg" data-value="15" onclick="demoTileSelect(event,this)">
-            </div>
-            <div id="CL1" class="demogriditem">
-                <input type="text" spellcheck="false" id="colorinput1" class="colorinput" value="#C41E3A" style="background-image: radial-gradient(circle, #F1F3F4 50%, #C41E3A)" oninput="demoColorChange(this)" onfocusout="demoColorFocusOut(this)">
-            </div>
-            <div id="CL2" class="demogriditem">
-                <input type="text" spellcheck="false" id="colorinput2" class="colorinput" value="#0C2340" style="background-image: radial-gradient(circle, #F1F3F4 50%, #0C2340)" oninput="demoColorChange(this)" onfocusout="demoColorFocusOut(this)">
-            </div>
-            <div id="CL3" class="demogriditem">
-                <input type="text" spellcheck="false" id="colorinput3" class="colorinput" value="#FEDB00" style="background-image: radial-gradient(circle, #F1F3F4 50%, #FEDB00)" oninput="demoColorChange(this)" onfocusout="demoColorFocusOut(this)">
-            </div>
-            <div id="OTS" class="demogriditem">
-                <input type="range" min="0" max="100" value="50" class="slider" id="outlinethicknessslider" onchange="demoSliderChange(this)">
-            </div>
-            <div id="SZS" class="demogriditem">
-                <input type="range" min="1" max="50" value="12" class="slider" id="sizeslider" onchange="demoSliderChange(this)">
-            </div>
-            <div id="CNV" class="demogriditem">
-                <div id="canvascopybutton" onclick="demoCanvasCopy()">copy &lt;canvas&gt; code</div>
-            </div>
+  <head>
+    <title>truchettiles</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
+    <link rel="stylesheet" href="css/truchettiles.css">
+    <link rel="stylesheet" href="css/index.css">
+  </head>
+  <body>
+    <canvas id="truchet-tiles" data-style="7" data-color-1="#C41E3A" data-color-2="#0C2340" data-color-3="#FEDB00" data-outline-thickness="50" data-size="12"></canvas>
+    <div id="demo-grid">
+      <div id="ttt" class="demo-grid-item">
+        <div id="title">
+          <span>truchettiles</span>
+          <a href="https://github.com/johnprovazek/truchettiles"><i class="fa fa-github-square" aria-hidden="true"></i></a>
+          <i class="fa fa-refresh" aria-hidden="true" onclick="demoRandomize()"></i>
         </div>
-    </body>
-    <script src="js/truchettiles.js"></script>
-    <script src="js/index.js"></script>
+      </div>
+      <div id="tiles-wrapper" oncontextmenu="demoTilesPreventContextMenuMobile(event)">
+        <div id="t01" class="demo-grid-item">
+          <img id="tile-image-1" class="tile-image" src="img/working_demo_svgs/t1.svg" data-value="1" onclick="demoTileSelect(event,this)">
+        </div>
+        <div id="t02" class="demo-grid-item">
+          <img id="tile-image-2" class="tile-image" src="img/working_demo_svgs/t2.svg" data-value="2" onclick="demoTileSelect(event,this)">
+        </div>
+        <div id="t03" class="demo-grid-item">
+          <img id="tile-image-3" class="tile-image" src="img/working_demo_svgs/t3.svg" data-value="3" onclick="demoTileSelect(event,this)">
+        </div>
+        <div id="t04" class="demo-grid-item">
+          <img id="tile-image-4" class="tile-image" src="img/working_demo_svgs/t4.svg" data-value="4" onclick="demoTileSelect(event,this)">
+        </div>
+        <div id="t05" class="demo-grid-item">
+          <img id="tile-image-5" class="tile-image" src="img/working_demo_svgs/t5.svg" data-value="5" onclick="demoTileSelect(event,this)">
+        </div>
+        <div id="t06" class="demo-grid-item">
+          <img id="tile-image-6" class="tile-image" src="img/working_demo_svgs/t6.svg" data-value="6" onclick="demoTileSelect(event,this)">
+        </div>
+        <div id="t07" class="demo-grid-item">
+          <img id="tile-image-7" class="tile-image tile-selected" src="img/working_demo_svgs/t7.svg" data-value="7" onclick="demoTileSelect(event,this)">
+        </div>
+        <div id="t08" class="demo-grid-item">
+          <img id="tile-image-8" class="tile-image" src="img/working_demo_svgs/t8.svg" data-value="8" onclick="demoTileSelect(event,this)">
+        </div>
+        <div id="t09" class="demo-grid-item">
+          <img id="tile-image-9" class="tile-image" src="img/working_demo_svgs/t9.svg" data-value="9" onclick="demoTileSelect(event,this)">
+        </div>
+        <div id="t10" class="demo-grid-item">
+          <img id="tile-image-10" class="tile-image" src="img/working_demo_svgs/t10.svg" data-value="10" onclick="demoTileSelect(event,this)">
+        </div>
+        <div id="t11" class="demo-grid-item">
+          <img id="tile-image-11" class="tile-image" src="img/working_demo_svgs/t11.svg" data-value="11" onclick="demoTileSelect(event,this)">
+        </div>
+        <div id="t12" class="demo-grid-item">
+          <img id="tile-image-12" class="tile-image" src="img/working_demo_svgs/t12.svg" data-value="12" onclick="demoTileSelect(event,this)">
+        </div>
+        <div id="t13" class="demo-grid-item">
+          <img id="tile-image-13" class="tile-image" src="img/working_demo_svgs/t13.svg" data-value="13" onclick="demoTileSelect(event,this)">
+        </div>
+        <div id="t14" class="demo-grid-item">
+          <img id="tile-image-14" class="tile-image" src="img/working_demo_svgs/t14.svg" data-value="14" onclick="demoTileSelect(event,this)">
+        </div>
+        <div id="t15" class="demo-grid-item">
+          <img id="tile-image-15" class="tile-image" src="img/working_demo_svgs/t15.svg" data-value="15" onclick="demoTileSelect(event,this)">
+        </div>
+      </div>
+      <div id="cl1" class="demo-grid-item">
+        <input id="color-input-1" type="text" spellcheck="false" class="color-input" data-value="#C41E3A" value="#C41E3A" style="background-image: radial-gradient(circle, #F1F3F4 50%, #C41E3A)" oninput="demoColorChange(this)" onfocusout="demoColorFocusOut(this)">
+      </div>
+      <div id="cl2" class="demo-grid-item">
+        <input id="color-input-2" type="text" spellcheck="false" class="color-input" data-value="#0C2340" value="#0C2340" style="background-image: radial-gradient(circle, #F1F3F4 50%, #0C2340)" oninput="demoColorChange(this)" onfocusout="demoColorFocusOut(this)">
+      </div>
+      <div id="cl3" class="demo-grid-item">
+        <input id="color-input-3" type="text" spellcheck="false" class="color-input" data-value="#FEDB00" value="#FEDB00" style="background-image: radial-gradient(circle, #F1F3F4 50%, #FEDB00)" oninput="demoColorChange(this)" onfocusout="demoColorFocusOut(this)">
+      </div>
+      <div id="ots" class="demo-grid-item">
+        <input id="outline-thickness-slider" type="range" min="0" max="100" value="50" class="slider" onchange="demoSliderChange(this)">
+      </div>
+      <div id="szs" class="demo-grid-item">
+        <input id="size-slider" type="range" min="1" max="50" value="12" class="slider" onchange="demoSliderChange(this)">
+      </div>
+      <div id="cnv" class="demo-grid-item">
+        <div id="canvas-copy-button" onclick="demoCanvasCopy()">copy &lt;canvas&gt; code</div>
+      </div>
+    </div>
+  </body>
+  <script src="js/truchettiles.js"></script>
+  <script src="js/index.js"></script>
 </html>
