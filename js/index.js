@@ -8,10 +8,7 @@ function demoSetStyle(style, load){
   for (let i = 0; i < tileStyles.length; i++) {
     document.getElementById('tile-image-' + tileStyles[i]).classList.add('tile-selected')
   }
-  tilesSetStyle(style)
-  if(load){
-    tilesLoad()
-  }
+  tilesSetStyle(style, load)
 }
 
 function demoSetColor1(color, load){
@@ -21,10 +18,7 @@ function demoSetColor1(color, load){
   colorInput1Element.style.borderColor = "#292F33"
   colorInput1Element.value = color;
   colorInput1Element.setAttribute('data-value', color);
-  tilesSetColor1(color)
-  if(load){
-    tilesLoad()
-  }
+  tilesSetColor1(color, load)
 }
 
 function demoSetColor2(color, load){
@@ -34,10 +28,7 @@ function demoSetColor2(color, load){
   colorInput2Element.style.borderColor = "#292F33"
   colorInput2Element.value = color;
   colorInput2Element.setAttribute('data-value', color);
-  tilesSetColor2(color)
-  if(load){
-    tilesLoad()
-  }
+  tilesSetColor2(color, load)
 }
 
 function demoSetColor3(color, load){
@@ -47,28 +38,19 @@ function demoSetColor3(color, load){
   colorInput3Element.style.borderColor = "#292F33"
   colorInput3Element.value = color;
   colorInput3Element.setAttribute('data-value', color);
-  tilesSetColor3(color)
-  if(load){
-    tilesLoad()
-  }
+  tilesSetColor3(color, load)
 }
 
 function demoSetThickness(thickness, load){
   // Setting the slider value
   document.getElementById('outline-thickness-slider').value = thickness
-  tilesSetThickness(thickness)
-  if(load){
-    tilesLoad()
-  }
+  tilesSetThickness(thickness, load)
 }
 
 function demoSetSize(size, load){
   // Setting the slider value
   document.getElementById('size-slider').value = size
-  tilesSetSize(size)
-  if(load){
-    tilesLoad()
-  }
+  tilesSetSize(size, load)
 }
 
 function demoLoadAllTiles(tilesStyle,tilesColor1,tilesColor2,tilesColor3,tilesThickness,tilesSize){

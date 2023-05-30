@@ -35,7 +35,7 @@ The majority of the truchet tile designs I used were taken from this [website](h
 
 ## Bugs & Improvements
 
-- Add an info option to demo page to give the user instructions.
-- Consider offering a React component of truchettiles.
-- Configure truchettiles code to only reload canvas when style is changed.
+- Add an info option to the demo page to give user instructions.
+- Investigate and fix bug where occasionally tiles will be drawn on canvas with small gaps.
+- Consider offering a React component implementation.
 - Use a linter and a style guide.
