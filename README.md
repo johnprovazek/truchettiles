@@ -36,6 +36,6 @@ The majority of the truchet tile designs I used were taken from this [website](h
 ## Bugs & Improvements
 
 - Add an info option to the demo page to give user instructions.
-- Investigate and fix bug where occasionally tiles will be drawn on canvas with small gaps.
+- Investigate and fix bug where occasionally tiles will be drawn on canvas with small noticable gaps on the tiles edge.
 - Consider offering a React component implementation.
 - Use a linter and a style guide.
