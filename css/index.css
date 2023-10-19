@@ -1,12 +1,10 @@
-@font-face {  
-  font-family: 'ConsolasApple';
-  font-style: normal;  
-  unicode-range: U+000-5FF;
-  src: local('FormataMedium'), url('../fonts/Consolas.woff2') format('woff2'), url('../fonts/Consolas.woff') format('woff');
+@font-face {
+  font-family: 'Consolas';
+  src: url('../fonts/Consolas.woff2') format('woff2'), url('../fonts/Consolas.woff') format('woff');
 }
 
 html{
-  font-family: Consolas, ConsolasApple;
+  font-family: Consolas;
   font-size: 16px;
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -15,6 +13,10 @@ html{
   -ms-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: transparent;
+}
+
+a {
+  color: #292f33;
 }
 
 #demo-grid{
@@ -79,10 +81,35 @@ html{
   padding: min(0.75vw,5px);
 }
 
+#title{
+  height:100%;
+  width:100%;
+  line-height: min(15vw,100px);
+  text-align: center;
+  font-size: min(6vw,40px);
+  font-weight: bold;
+  color: #292f33;
+}
+
+.fa{
+  cursor: pointer;
+}
+
+#tiles-wrapper{
+  display: contents;
+}
+
 .tile-image{
   width:100%;
   height:100%;
   cursor: pointer;
+}
+
+.tile-selected{
+  outline-width: min(0.75vw,5px);
+  outline-offset: max(-0.75vw,-5px);
+  outline-style: solid;
+  outline-color:#292F33;
 }
 
 .color-input{
@@ -91,7 +118,7 @@ html{
   box-sizing: border-box;
   -webkit-appearance: none;
   outline: none;
-  font-family: Consolas, ConsolasApple;
+  font-family: Consolas;
   font-weight: bold;
   text-align: center;
   width:100%;
@@ -137,7 +164,7 @@ html{
   box-sizing: border-box;
   -webkit-appearance: none;
   outline: none;
-  font-family: Consolas, ConsolasApple;
+  font-family: Consolas;
   font-weight: bold;
   width:100%;
   height:100%;
@@ -151,34 +178,4 @@ html{
 
 #canvas-copy-button:hover{
   background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAABZJREFUeNpi2r9//38gYGAEESAAEGAAasgJOgzOKCoAAAAASUVORK5CYII=);
-}
-
-
-.tile-selected{
-  outline-width: min(0.75vw,5px);
-  outline-offset: max(-0.75vw,-5px);
-  outline-style: solid;
-  outline-color:#292F33;
-}
-
-a {
-  color: #292f33;
-}
-
-#title{
-  height:100%;
-  width:100%;
-  line-height: min(15vw,100px);
-  text-align: center;
-  font-size: min(6vw,40px);
-  font-weight: bold;
-  color: #292f33;
-}
-
-.fa{
-  cursor: pointer;
-}
-
-#tiles-wrapper{
-  display: contents;
 }

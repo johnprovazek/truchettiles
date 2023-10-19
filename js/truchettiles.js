@@ -3,8 +3,8 @@ var screenWidth; // Screen width multiplied by devicePixelRatio.
 var screenMax; // Max of screen height and screen width.
 var numSquares; // Number of squares to be shown along the screenMax.
 var tileDistance; // Width of each tile.
-var imgArray; // Holds the svg tiles in use including rotations.
-var imgGridArray; // Holds all the svg tiles on the canvas.
+var imgArray; // Holds the SVG tiles in use including rotations.
+var imgGridArray; // Holds all the SVG tiles on the canvas.
 var totalImages; // Total count of images on the canvas.
 var curX = -1; // Current x mouse value of which square is being moused over.
 var curY = -1; // Current y mouse value of which square is being moused over.
@@ -224,8 +224,7 @@ document.body.addEventListener('mousemove', function(event) {
   tilesMouseMove(event);
 });
 
-
-// Setter function for tiles style.
+// Setter function for tile style value.
 function tilesSetStyle(input, load){
   // Checking styles are in the appropriate range.
   const styleArray = input.split('&');
@@ -245,7 +244,7 @@ function tilesSetStyle(input, load){
   }
 }
 
-// Setter function for tiles color1.
+// Setter function for tile color1 value.
 function tilesSetColor1(input, load){
   // Checking color is valid.
   let styleTest = new Option().style;
@@ -262,7 +261,7 @@ function tilesSetColor1(input, load){
   }
 }
 
-// Setter function for tiles color2.
+// Setter function for tile color2 value.
 function tilesSetColor2(input, load){
   // Checking color is valid.
   let styleTest = new Option().style;
@@ -279,7 +278,7 @@ function tilesSetColor2(input, load){
   }
 }
 
-// Setter function for tiles color3.
+// Setter function for tile color3 value.
 function tilesSetColor3(input, load){
   // Checking color is valid.
   let styleTest = new Option().style;
@@ -296,7 +295,7 @@ function tilesSetColor3(input, load){
   }
 }
 
-// Setter function for tiles thickness.
+// Setter function for tile thickness value.
 function tilesSetThickness(input, load){
   // Checking thickness is in the appropriate range.
   let withinRange = true;
@@ -306,14 +305,14 @@ function tilesSetThickness(input, load){
     withinRange = false;
   }
   if(withinRange){
-    tilesThickness = input
+    tilesThickness = input;
   }
   if(load){
     tilesLoad();
   }
 }
 
-// Setter function for tiles size.
+// Setter function for tile size value.
 function tilesSetSize(input, load){
   // Checking thickness is in the appropriate range.
   let withinRange = true;
@@ -323,7 +322,7 @@ function tilesSetSize(input, load){
     withinRange = false;
   }
   if(withinRange){
-    tilesSize = input
+    tilesSize = input;
   }
   if(load){
     tilesLoad();
@@ -339,10 +338,10 @@ function tilesGetRandomInt(max) {
 function tilesOnResize() {
   let canvas = document.getElementById('truchet-tiles');
   let context = canvas.getContext('2d');
-  let scaledWidth = Math.round(document.body.clientWidth * window.devicePixelRatio)
-  let scaledHeight = Math.round(document.body.clientHeight * window.devicePixelRatio)
-  canvas.width = scaledWidth
-  canvas.height = scaledHeight
+  let scaledWidth = Math.round(document.body.clientWidth * window.devicePixelRatio);
+  let scaledHeight = Math.round(document.body.clientHeight * window.devicePixelRatio);
+  canvas.width = scaledWidth;
+  canvas.height = scaledHeight;
   for (var i = 0; i < numSquares; i++) {
     for (var j = 0; j < numSquares; j++) {
       context.drawImage(imgArray[imgGridArray[i][j]], i*tileDistance, j*tileDistance, tileDistance, tileDistance);
@@ -359,7 +358,6 @@ function tilesLoad() {
   for (let i = 0; i < totalImages; i++) {
     imgArray[i] = new Image();
   }
-
   // Onload callback for SVG images.
   let onloadCallback = function(){
     imageLoadCounter++;
@@ -368,18 +366,16 @@ function tilesLoad() {
     }
     allLoadedCallback();
   };
-
   // Onerror callback for SVG images.
   let onerrorCallback = function(msg){
     imageLoadCounter++;
     if(imageLoadCounter < totalImages){
       return;
     }
-    console.error(msg)
+    console.error(msg);
     allLoadedCallback();
   };
-
-  // Function is ran once all tile images are loaded.
+  // Once all tile images are loaded randomizes and draws the tiles.
   let allLoadedCallback = function(){
     let canvas = document.getElementById('truchet-tiles');
     let context = canvas.getContext('2d');
@@ -395,7 +391,6 @@ function tilesLoad() {
     tileDistance = Math.max(scaledTileDistance, screenTileDistance);
     canvas.width = scaledWidth;
     canvas.height = scaledHeight;
-
     // Creating a new randomized grid array if the tile style of tile distance value has changed.
     let newStyle = liveTilesStyle === null || liveTilesStyle !== tilesStyle;
     let newDistance = liveTilesDistance === null || liveTilesDistance !== tileDistance;
@@ -408,42 +403,38 @@ function tilesLoad() {
         }
       }
     }
-
     // Drawing tiles on the canvas.
     for (let i = 0; i < numSquares; i++) {
       for (let j = 0; j < numSquares; j++) {
         context.drawImage(imgArray[imgGridArray[i][j]], i*tileDistance, j*tileDistance, tileDistance, tileDistance);
       }
     }
-
     liveTilesStyle = tilesStyle;
     liveTilesDistance = tileDistance;
   };
-
   // Setting callback functions for the tile images.
   for (let i = 0; i < totalImages; i++) {
     imgArray[i].onload = onloadCallback;
     imgArray[i].onerror = onerrorCallback;
   }
-
   // Applying settings to the SVGs.
   for (let i = 0; i < styleArray.length; i++) {
     let svgElement = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svgElement.setAttribute('xmlns','http://www.w3.org/2000/svg')
+    svgElement.setAttribute('xmlns','http://www.w3.org/2000/svg');
     svgElement.setAttribute('width', '1200');
     svgElement.setAttribute('height', '1200');
-    svgElement.style.backgroundColor = tilesColor2
+    svgElement.style.backgroundColor = tilesColor2;
     let svgHtmlElement = new DOMParser().parseFromString(svgArray[styleArray[i]], 'text/xml');
-    svgElement.appendChild(svgHtmlElement.documentElement)
-    // group = svgElement.getElementById("group") // Had to remove to work on iPad
-    let group = svgElement.children[0]
+    svgElement.appendChild(svgHtmlElement.documentElement);
+    // group = svgElement.getElementById("group") // Had to remove to work on iPad.
+    let group = svgElement.children[0];
     let fillItems = group.getElementsByClassName('fillColor');
     for (let j = 0; j < fillItems.length; j++) {
-      fillItems[j].setAttribute('style',fillItems[j].getAttribute('style')+'fill:'+tilesColor1)
+      fillItems[j].setAttribute('style',fillItems[j].getAttribute('style')+'fill:'+tilesColor1);
     }
     let strokeItems = group.getElementsByClassName('strokeColor');
     for (let j = 0; j < strokeItems.length; j++) {
-      strokeItems[j].setAttribute('style',strokeItems[j].getAttribute('style')+'stroke:'+tilesColor3+';stroke-width:'+tilesThickness)
+      strokeItems[j].setAttribute('style',strokeItems[j].getAttribute('style')+'stroke:'+tilesColor3+';stroke-width:'+tilesThickness);
     }
     imgArray[0+(i*4)].src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(svgElement.outerHTML);
     group.setAttribute('transform', 'rotate(90,600,600)');
@@ -459,14 +450,14 @@ function tilesLoad() {
 function tilesMouseMove(event) {
   let canvas = document.getElementById('truchet-tiles');
   let context = canvas.getContext('2d');
-  let scrollbar_adjustment = (window.innerWidth * window.devicePixelRatio) / (document.body.clientWidth * window.devicePixelRatio)
-  let firstX = (event.clientX * window.devicePixelRatio) * scrollbar_adjustment
-  let firstY = (event.clientY * window.devicePixelRatio)
-  let x = Math.floor(firstX / tileDistance)
-  let y = Math.floor(firstY / tileDistance)
+  let scrollbar_adjustment = (window.innerWidth * window.devicePixelRatio) / (document.body.clientWidth * window.devicePixelRatio);
+  let firstX = (event.clientX * window.devicePixelRatio) * scrollbar_adjustment;
+  let firstY = (event.clientY * window.devicePixelRatio);
+  let x = Math.floor(firstX / tileDistance);
+  let y = Math.floor(firstY / tileDistance);
   if(x != curX || y != curY){
     // This is for the styles that only have two unique rotations.
-    if(tilesStyle === '1' || tilesStyle === '2'){ 
+    if(tilesStyle === '1' || tilesStyle === '2'){
       if(imgGridArray[x][y] === 0){
         imgGridArray[x][y] = 1;
       }
@@ -481,14 +472,14 @@ function tilesMouseMove(event) {
       }
     }
     else{
-      let randomInt = tilesGetRandomInt(totalImages)
+      let randomInt = tilesGetRandomInt(totalImages);
       while(randomInt === imgGridArray[x][y]){
-        randomInt = tilesGetRandomInt(totalImages)
+        randomInt = tilesGetRandomInt(totalImages);
       }
-      imgGridArray[x][y] = randomInt
+      imgGridArray[x][y] = randomInt;
     }
     context.clearRect(x*tileDistance, y*tileDistance, tileDistance, tileDistance);
-    context.drawImage(imgArray[imgGridArray[x][y]], x*tileDistance, y*tileDistance, tileDistance, tileDistance)
+    context.drawImage(imgArray[imgGridArray[x][y]], x*tileDistance, y*tileDistance, tileDistance, tileDistance);
     curX = x;
     curY = y;
   }
