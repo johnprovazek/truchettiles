@@ -2,86 +2,135 @@
 <html lang="en">
   <head>
     <title>truchettiles</title>
-    <meta name="viewport" content="width=device-width,initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="img/favicon.ico">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css">
-    <link rel="stylesheet" href="css/truchettiles.css">
-    <link rel="stylesheet" href="css/index.css">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="css/truchettiles.css" />
+    <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
-    <canvas id="truchet-tiles" data-style="7" data-color-1="#C41E3A" data-color-2="#0C2340" data-color-3="#FEDB00" data-outline-thickness="50" data-size="12"></canvas>
+    <canvas
+      id="truchet-tiles"
+      data-style="9"
+      data-color-1="#C41E3A"
+      data-color-2="#0C2340"
+      data-color-3="#FEDB00"
+      data-outline-thickness="50"
+      data-size="12"
+    ></canvas>
     <div id="demo-grid">
-      <div id="ttt" class="demo-grid-item">
-        <div id="title">
+      <div id="demo-grid-title-wrapper" class="demo-grid-item">
+        <div id="demo-grid-title">
           <span>truchettiles</span>
-          <a href="https://github.com/johnprovazek/truchettiles"><i class="fa fa-github-square" aria-hidden="true"></i></a>
-          <i class="fa fa-refresh" aria-hidden="true" onclick="demoRandomize()"></i>
+          <a href="https://github.com/johnprovazek/truchettiles"
+            ><i class="fa fa-github-square" aria-hidden="true"></i
+          ></a>
+          <i id="demo-grid-refresh" class="fa fa-refresh" aria-hidden="true"></i>
         </div>
       </div>
-      <div id="tiles-wrapper" oncontextmenu="demoTilesPreventContextMenuMobile(event)">
-        <div id="t01" class="demo-grid-item">
-          <img id="tile-image-1" class="tile-image" src="img/tiles/t1.svg" data-value="1" onclick="demoTileSelect(event,this)">
+      <div id="demo-grid-tiles-wrapper">
+        <div id="demo-grid-tile-1" class="demo-grid-item">
+          <img id="demo-grid-tile-image-1" class="demo-grid-tile-image" src="images/tiles/t1.svg" data-value="1" />
         </div>
-        <div id="t02" class="demo-grid-item">
-          <img id="tile-image-2" class="tile-image" src="img/tiles/t2.svg" data-value="2" onclick="demoTileSelect(event,this)">
+        <div id="demo-grid-tile-2" class="demo-grid-item">
+          <img id="demo-grid-tile-image-2" class="demo-grid-tile-image" src="images/tiles/t2.svg" data-value="2" />
         </div>
-        <div id="t03" class="demo-grid-item">
-          <img id="tile-image-3" class="tile-image" src="img/tiles/t3.svg" data-value="3" onclick="demoTileSelect(event,this)">
+        <div id="demo-grid-tile-3" class="demo-grid-item">
+          <img id="demo-grid-tile-image-3" class="demo-grid-tile-image" src="images/tiles/t3.svg" data-value="3" />
         </div>
-        <div id="t04" class="demo-grid-item">
-          <img id="tile-image-4" class="tile-image" src="img/tiles/t4.svg" data-value="4" onclick="demoTileSelect(event,this)">
+        <div id="demo-grid-tile-4" class="demo-grid-item">
+          <img id="demo-grid-tile-image-4" class="demo-grid-tile-image" src="images/tiles/t4.svg" data-value="4" />
         </div>
-        <div id="t05" class="demo-grid-item">
-          <img id="tile-image-5" class="tile-image" src="img/tiles/t5.svg" data-value="5" onclick="demoTileSelect(event,this)">
+        <div id="demo-grid-tile-5" class="demo-grid-item">
+          <img id="demo-grid-tile-image-5" class="demo-grid-tile-image" src="images/tiles/t5.svg" data-value="5" />
         </div>
-        <div id="t06" class="demo-grid-item">
-          <img id="tile-image-6" class="tile-image" src="img/tiles/t6.svg" data-value="6" onclick="demoTileSelect(event,this)">
+        <div id="demo-grid-tile-6" class="demo-grid-item">
+          <img id="demo-grid-tile-image-6" class="demo-grid-tile-image" src="images/tiles/t6.svg" data-value="6" />
         </div>
-        <div id="t07" class="demo-grid-item">
-          <img id="tile-image-7" class="tile-image tile-selected" src="img/tiles/t7.svg" data-value="7" onclick="demoTileSelect(event,this)">
+        <div id="demo-grid-tile-7" class="demo-grid-item">
+          <img id="demo-grid-tile-image-7" class="demo-grid-tile-image" src="images/tiles/t7.svg" data-value="7" />
         </div>
-        <div id="t08" class="demo-grid-item">
-          <img id="tile-image-8" class="tile-image" src="img/tiles/t8.svg" data-value="8" onclick="demoTileSelect(event,this)">
+        <div id="demo-grid-tile-8" class="demo-grid-item">
+          <img id="demo-grid-tile-image-8" class="demo-grid-tile-image" src="images/tiles/t8.svg" data-value="8" />
         </div>
-        <div id="t09" class="demo-grid-item">
-          <img id="tile-image-9" class="tile-image" src="img/tiles/t9.svg" data-value="9" onclick="demoTileSelect(event,this)">
+        <div id="demo-grid-tile-9" class="demo-grid-item">
+          <img
+            id="demo-grid-tile-image-9"
+            class="demo-grid-tile-image demo-grid-tile-selected"
+            src="images/tiles/t9.svg"
+            data-value="9"
+          />
         </div>
-        <div id="t10" class="demo-grid-item">
-          <img id="tile-image-10" class="tile-image" src="img/tiles/t10.svg" data-value="10" onclick="demoTileSelect(event,this)">
+        <div id="demo-grid-tile-10" class="demo-grid-item">
+          <img id="demo-grid-tile-image-10" class="demo-grid-tile-image" src="images/tiles/t10.svg" data-value="10" />
         </div>
-        <div id="t11" class="demo-grid-item">
-          <img id="tile-image-11" class="tile-image" src="img/tiles/t11.svg" data-value="11" onclick="demoTileSelect(event,this)">
+        <div id="demo-grid-tile-11" class="demo-grid-item">
+          <img id="demo-grid-tile-image-11" class="demo-grid-tile-image" src="images/tiles/t11.svg" data-value="11" />
         </div>
-        <div id="t12" class="demo-grid-item">
-          <img id="tile-image-12" class="tile-image" src="img/tiles/t12.svg" data-value="12" onclick="demoTileSelect(event,this)">
+        <div id="demo-grid-tile-12" class="demo-grid-item">
+          <img id="demo-grid-tile-image-12" class="demo-grid-tile-image" src="images/tiles/t12.svg" data-value="12" />
         </div>
-        <div id="t13" class="demo-grid-item">
-          <img id="tile-image-13" class="tile-image" src="img/tiles/t13.svg" data-value="13" onclick="demoTileSelect(event,this)">
+        <div id="demo-grid-tile-13" class="demo-grid-item">
+          <img id="demo-grid-tile-image-13" class="demo-grid-tile-image" src="images/tiles/t13.svg" data-value="13" />
         </div>
-        <div id="t14" class="demo-grid-item">
-          <img id="tile-image-14" class="tile-image" src="img/tiles/t14.svg" data-value="14" onclick="demoTileSelect(event,this)">
+        <div id="demo-grid-tile-14" class="demo-grid-item">
+          <img id="demo-grid-tile-image-14" class="demo-grid-tile-image" src="images/tiles/t14.svg" data-value="14" />
         </div>
-        <div id="t15" class="demo-grid-item">
-          <img id="tile-image-15" class="tile-image" src="img/tiles/t15.svg" data-value="15" onclick="demoTileSelect(event,this)">
+        <div id="demo-grid-tile-15" class="demo-grid-item">
+          <img id="demo-grid-tile-image-15" class="demo-grid-tile-image" src="images/tiles/t15.svg" data-value="15" />
         </div>
       </div>
-      <div id="cl1" class="demo-grid-item">
-        <input id="color-input-1" type="text" spellcheck="false" class="color-input" data-value="#C41E3A" value="#C41E3A" enterkeyhint="done" style="background-image: radial-gradient(circle, #F1F3F4 50%, #C41E3A)" oninput="demoColorChange(this)" onfocusout="demoColorFocusOut(this)">
+      <div id="demo-grid-color-input-wrapper-1" class="demo-grid-item">
+        <input
+          id="demo-grid-color-input-1"
+          type="text"
+          spellcheck="false"
+          class="demo-grid-color-input"
+          data-value="#C41E3A"
+          value="#C41E3A"
+          enterkeyhint="done"
+          style="background-image: radial-gradient(circle, #f1f3f4 50%, #c41e3a)"
+        />
       </div>
-      <div id="cl2" class="demo-grid-item">
-        <input id="color-input-2" type="text" spellcheck="false" class="color-input" data-value="#0C2340" value="#0C2340" enterkeyhint="done" style="background-image: radial-gradient(circle, #F1F3F4 50%, #0C2340)" oninput="demoColorChange(this)" onfocusout="demoColorFocusOut(this)">
+      <div id="demo-grid-color-input-wrapper-2" class="demo-grid-item">
+        <input
+          id="demo-grid-color-input-2"
+          type="text"
+          spellcheck="false"
+          class="demo-grid-color-input"
+          data-value="#0C2340"
+          value="#0C2340"
+          enterkeyhint="done"
+          style="background-image: radial-gradient(circle, #f1f3f4 50%, #0c2340)"
+        />
       </div>
-      <div id="cl3" class="demo-grid-item">
-        <input id="color-input-3" type="text" spellcheck="false" class="color-input" data-value="#FEDB00" value="#FEDB00" enterkeyhint="done" style="background-image: radial-gradient(circle, #F1F3F4 50%, #FEDB00)" oninput="demoColorChange(this)" onfocusout="demoColorFocusOut(this)">
+      <div id="demo-grid-color-input-wrapper-3" class="demo-grid-item">
+        <input
+          id="demo-grid-color-input-3"
+          type="text"
+          spellcheck="false"
+          class="demo-grid-color-input"
+          data-value="#FEDB00"
+          value="#FEDB00"
+          enterkeyhint="done"
+          style="background-image: radial-gradient(circle, #f1f3f4 50%, #fedb00)"
+        />
       </div>
-      <div id="ots" class="demo-grid-item">
-        <input id="outline-thickness-slider" type="range" min="0" max="100" value="50" class="slider" onchange="demoSliderChange(this)">
+      <div id="demo-grid-outline-thickness-slider-wrapper" class="demo-grid-item">
+        <input
+          id="demo-grid-outline-thickness-slider"
+          type="range"
+          min="0"
+          max="100"
+          value="50"
+          class="demo-grid-slider"
+        />
       </div>
-      <div id="szs" class="demo-grid-item">
-        <input id="size-slider" type="range" min="1" max="50" value="12" class="slider" onchange="demoSliderChange(this)">
+      <div id="demo-grid-size-slider-wrapper" class="demo-grid-item">
+        <input id="demo-grid-size-slider" type="range" min="1" max="50" value="12" class="demo-grid-slider" />
       </div>
-      <div id="cnv" class="demo-grid-item">
-        <div id="canvas-copy-button" onclick="demoCanvasCopy()">copy &lt;canvas&gt; code</div>
+      <div id="demo-grid-copy-button-wrapper" class="demo-grid-item">
+        <div id="demo-grid-copy-button">copy &lt;canvas&gt; code</div>
       </div>
     </div>
   </body>

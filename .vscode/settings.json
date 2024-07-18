@@ -1,0 +1,15 @@
+{
+  "prettier.configPath": ".vscode/.prettierrc",
+  "files.exclude": {
+    "local-dev/": true
+  },
+  "search.exclude": {
+    "local-dev/": true
+  },
+  "cSpell.words": [
+    "callout",
+    "johnprovazek",
+    "truchet",
+    "truchettiles"
+  ]
+}
