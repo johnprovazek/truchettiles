@@ -4,7 +4,13 @@
 
 This project implements an interactive [truchet tile](https://en.wikipedia.org/wiki/Truchet_tiles) background that is designed to be used in web projects. You can access a demo at [johnprovazek.com/truchettiles](https://www.johnprovazek.com/truchettiles/).
 
-Built using vanilla JavaScript utilizing the `<canvas>` element.
+Built using vanilla JavaScript.
+
+<div align="center">
+  <picture>
+    <img src="https://github.com/user-attachments/assets/2ce85a89-beea-4778-ae01-4252f9d35a32" width="830px">
+  </picture>
+</div>
 
 ## Installation
 
