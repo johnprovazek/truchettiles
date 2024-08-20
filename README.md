@@ -8,7 +8,7 @@ Built using vanilla JavaScript.
 
 <div align="center">
   <picture>
-    <img src="https://github.com/user-attachments/assets/2ce85a89-beea-4778-ae01-4252f9d35a32" width="830px">
+    <img src="https://repository-images.githubusercontent.com/472082067/4e0680c6-4bc9-4d9a-86c7-121f57df775f" width="830px">
   </picture>
 </div>
 
