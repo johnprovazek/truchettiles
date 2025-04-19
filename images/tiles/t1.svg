@@ -1,13 +1,15 @@
-<svg
-    xmlns="http://www.w3.org/2000/svg"
-    width="1200"
-    height="1200">
-    <g id="group">
-        <path d="M500,1200c0-386.59932,313.40068-700,700-700v200c-276.14237,0-500,223.85763-500,500h-200Z" fill="#dee1e6" stroke-width="0"/>
-        <path d="M700,0C700,386.59932,386.59932,700,0,700v-200C276.14237,500,500,276.14237,500,0h200Z" fill="#dee1e6" stroke-width="0"/>
-        <path d="M0,500C276.14237,500,500,276.14237,500,0" fill="none" stroke="#292F33" stroke-width="30"/>
-        <path d="M700,0C700,386.59932,386.59932,700,0,700" fill="none" stroke="#292F33" stroke-width="30"/>
-        <path d="M1200,700c-276.14237,0-500,223.85763-500,500" fill="none" stroke="#292F33" stroke-width="30"/>
-        <path d="M500,1200c0-386.59932,313.40068-700,700-700" fill="none" stroke="#292F33" stroke-width="30"/>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200">
+  <style>
+    .fillColor {
+      fill: #dee1e6;
+    }
+    .strokeColor {
+      stroke: #292F33;
+      stroke-width: 30;
+    }
+  </style>
+  <g id="group">
+    <path class="fillColor" style="stroke-width:0;" d="M500 1200a700 700 0 0 1 700-700v200a500 500 0 0 0-500 500H500zM700 0A700 700 0 0 1 0 700V500A500 500 0 0 0 500 0h200z"/>
+    <path class="strokeColor" style="fill:none;" d="M0 500A500 500 0 0 0 500 0M700 0A700 700 0 0 1 0 700M1200 700a500 500 0 0 0-500 500M500 1200a700 700 0 0 1 700-700"/>
+  </g>
 </svg>

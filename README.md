@@ -2,46 +2,47 @@
 
 ## Description
 
-This project implements an interactive [truchet tile](https://en.wikipedia.org/wiki/Truchet_tiles) background that is designed to be used in web projects. You can access a demo at [johnprovazek.com/truchettiles](https://www.johnprovazek.com/truchettiles/).
+This project implements an interactive [truchet tiles](https://en.wikipedia.org/wiki/Truchet_tiles) website background.
+You can access a demo at [johnprovazek.com/truchettiles](https://www.johnprovazek.com/truchettiles/).
 
-Built using vanilla JavaScript.
+Built using vanilla JavaScript utilizing the `<canvas>` element.
 
 <div align="center">
   <picture>
-    <img src="https://repository-images.githubusercontent.com/472082067/4e0680c6-4bc9-4d9a-86c7-121f57df775f" width="830px">
+    <img src="https://repository-images.githubusercontent.com/472082067/562ac442-cf34-4d4e-a625-36ae3f78cc8b" width="830px">
   </picture>
 </div>
 
 ## Installation
 
-To utilize truchet tiles in your own project start by placing a `<canvas>` element with the id "truchet-tiles" within the body of your html file. There are six attributes that need to be added to the `<canvas>` element to properly setup the truchet tiles.
+To utilize this truchet tiles background in your own project start by placing a `<canvas>` element with the id "truchet-tiles" within the body of your HTML file.
+There are six attributes that can be configured in the `<canvas>` element to setup the truchet tiles background.
 
-- `data-style` is the style of tile you would like to use. This value should be either in the range 1-15 or styles could be combined with "&" as a delimiter.
-- `data-color-1` is the main color of the tile. This could be represented as "#FFFFFF", "red", or "rgb(100,200,100)" for example.
-- `data-color-2` is the background color of the tile. This could be represented as "#FFFFFF", "red", or "rgb(100,200,100)" for example.
-- `data-color-3` is the color of the shape outline. This could be represented as "#FFFFFF", "red", or "rgb(100,200,100)" for example.
-- `data-outline-thickness` is the size of the outline thickness. This needs to be in the range 0-100. A "0" thickness would represent no outline.
-- `data-size` is the size of the tiles. This needs to be in the range 1-50.
+- `data-pattern` is the pattern of tile you would like to use. This value needs to be in the range 1-15. Styles can be combined using "&" as a delimiter.
+- `data-color-1` is the main color of the tile. This could be represented as any valid CSS color.
+- `data-color-2` is the background color of the tile. This could be represented as any valid CSS color.
+- `data-color-3` is the color of the outline. This could be represented as any valid CSS color.
+- `data-stroke` is the size of the stroke outline. This needs to be in the range 1-25.
+- `data-size` is the size of the tiles. This needs to be in the range 1-25.
 
 Here's an example `<canvas>` element with the attributes filled out:
 
 ```html
 <canvas
   id="truchet-tiles"
-  data-style="7"
-  data-color-1="#C41E3A"
-  data-color-2="#0C2340"
-  data-color-3="#FEDB00"
-  data-outline-thickness="50"
-  data-size="12"
+  data-pattern="9"
+  data-color-1="#1ce376"
+  data-color-2="#60eb9f"
+  data-color-3="#a4f4c8"
+  data-stroke="20"
+  data-size="16"
 ></canvas>
 ```
 
-You can use the [demo page](https://www.johnprovazek.com/truchettiles/) to test out different configurations. In the [demo page](https://www.johnprovazek.com/truchettiles/) there is a button that can be used to copy the demo configuration to your project.
+You can use the [demo page](https://www.johnprovazek.com/truchettiles/) to test out different truchet tile background configurations.
+At the bottom of the [demo page](https://www.johnprovazek.com/truchettiles/) there is a button that can be used to copy the configuration to your own project.
 
-You will need to include the files [truchettiles.js](./js/truchettiles.js) and [truchettiles.css](./css/truchettiles.css) in your project.
-
-You may need to make some adjustments to get this to work with your project. This project is built assuming the body has a margin of 0, min-height of 100lvh, and min-width of 100lvw
+You will also need to include the file [truchet-tiles.js](./js/truchet-tiles.js) in your project to get this to work.
 
 ## Usage
 
@@ -49,13 +50,15 @@ Interact with the `<canvas>` with your mouse to change the orientation of the ti
 
 ## Credits
 
-The majority of the truchet tile designs were taken from this [website](http://arearugscarpet.blogspot.com/2014/04/the-curse-of-truchets-tiles.html).
+- The majority of the truchet tile designs were adapted from the designs found on this [blog post](http://arearugscarpet.blogspot.com/2014/04/the-curse-of-truchets-tiles.html).
+- [TinyColor](https://github.com/bgrins/TinyColor) was used to generate random but harmonious color palettes.
+- [Font Awesome](https://github.com/FortAwesome/Font-Awesome) and [IcoMoon](https://icomoon.io/) were used for the icons.
 
 ## Bugs & Improvements
 
-- Add a color picker.
-- Fix demo issues when zooming in on browsers.
-- Restructure the demo grid and fix overflow issue.
-- Add an info option to the demo page to give user instructions.
-- Consider adding value of the slider in the slider thumb.
-- Investigate and fix bug where occasionally tiles will be drawn on canvas with small noticeable gaps on the tiles edge.
+- Reconfigure this project as a custom HTML element.
+- Add an option to disable the line stroke.
+- Add an option to disable the mouse movement.
+- Add an option to disable the canvas background.
+- Consider adding the value of each slider on the slider thumb for the demo page.
+- Fix bug where at specific tile sizes and canvas sizes the tiles will occasionally be drawn on the canvas shifted a pixel up or left from where they should be drawn.

@@ -1,14 +1,15 @@
-<svg 
-    xmlns="http://www.w3.org/2000/svg"
-    width="1200" 
-    height="1200">
-    <g id="group">
-        <path d="M240,0.00001L1200,960v0v240h-240L0,240L0,0.00001h240Z" fill="#dee1e6" stroke-width="0"/>
-        <path d="M1200,240L960,0.00001h240L1200,240Z" fill="#dee1e6" stroke-width="0"/>
-        <path d="M0,1200v-240l240,240h-240Z" fill="#dee1e6" stroke-width="0"/>
-        <path d="M1200,240L960,0.00001" fill="none" stroke="#292F33" stroke-width="30" stroke-linecap="square"/>
-        <path d="M240,0.00001L1200,960v0" fill="none" stroke="#292F33" stroke-width="30" stroke-linecap="square"/>
-        <path d="M960,1200L0,240" fill="none" stroke="#292F33" stroke-width="30" stroke-linecap="square"/>
-        <path d="M0,960l240,240" fill="none" stroke="#292F33" stroke-width="30" stroke-linecap="square"/>
-    </g>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200">
+  <style>
+    .fillColor {
+      fill: #dee1e6;
+    }
+    .strokeColor {
+      stroke: #292F33;
+      stroke-width: 30;
+    }
+  </style>
+  <g id="group">
+    <path class="fillColor" style="stroke-width:0;" d="M240 0l960 960v240H960L0 240V0h240zM1200 240L960 0h240v240zM0 1200V960l240 240H0z"/>
+    <path class="strokeColor" style="fill:none;" stroke-linecap="square" d="M1200 240L960 0M240 0l960 960v0M960 1200L0 240M0 960l240 240"/>
+  </g>
 </svg>

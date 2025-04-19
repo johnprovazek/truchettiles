@@ -4,136 +4,659 @@
     <title>truchettiles</title>
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
     <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="css/truchettiles.css" />
     <link rel="stylesheet" href="css/index.css" />
   </head>
   <body>
-    <canvas
-      id="truchet-tiles"
-      data-style="9"
-      data-color-1="#C41E3A"
-      data-color-2="#0C2340"
-      data-color-3="#FEDB00"
-      data-outline-thickness="50"
-      data-size="12"
-    ></canvas>
-    <div id="demo-grid">
-      <div id="demo-grid-title-wrapper" class="demo-grid-item">
+    <canvas id="truchet-tiles"></canvas>
+    <div id="main-panel">
+      <div id="demo-grid">
         <div id="demo-grid-title">
           <span>truchettiles</span>
-          <a href="https://github.com/johnprovazek/truchettiles"
-            ><i class="fa fa-github-square" aria-hidden="true"></i
-          ></a>
-          <i id="demo-grid-refresh" class="fa fa-refresh" aria-hidden="true"></i>
+          <a href="https://github.com/johnprovazek/truchettiles"><span class="icon-github"></span></a>
+          <span id="demo-grid-randomize-button" class="icon icon-shuffle"></span>
+        </div>
+        <div id="demo-grid-tile-1" class="demo-grid-tile" data-pattern-id="1">
+          <img src="images/tiles/t1.svg" />
+        </div>
+        <div id="demo-grid-tile-2" class="demo-grid-tile" data-pattern-id="2">
+          <img src="images/tiles/t2.svg" />
+        </div>
+        <div id="demo-grid-tile-3" class="demo-grid-tile" data-pattern-id="3">
+          <img src="images/tiles/t3.svg" />
+        </div>
+        <div id="demo-grid-tile-4" class="demo-grid-tile" data-pattern-id="4">
+          <img src="images/tiles/t4.svg" />
+        </div>
+        <div id="demo-grid-tile-5" class="demo-grid-tile" data-pattern-id="5">
+          <img src="images/tiles/t5.svg" />
+        </div>
+        <div id="demo-grid-tile-6" class="demo-grid-tile" data-pattern-id="6">
+          <img src="images/tiles/t6.svg" />
+        </div>
+        <div id="demo-grid-tile-7" class="demo-grid-tile" data-pattern-id="7">
+          <img src="images/tiles/t7.svg" />
+        </div>
+        <div id="demo-grid-tile-8" class="demo-grid-tile" data-pattern-id="8">
+          <img src="images/tiles/t8.svg" />
+        </div>
+        <div id="demo-grid-tile-9" class="demo-grid-tile" data-pattern-id="9">
+          <img src="images/tiles/t9.svg" />
+        </div>
+        <div id="demo-grid-tile-10" class="demo-grid-tile" data-pattern-id="10">
+          <img src="images/tiles/t10.svg" />
+        </div>
+        <div id="demo-grid-tile-11" class="demo-grid-tile" data-pattern-id="11">
+          <img src="images/tiles/t11.svg" />
+        </div>
+        <div id="demo-grid-tile-12" class="demo-grid-tile" data-pattern-id="12">
+          <img src="images/tiles/t12.svg" />
+        </div>
+        <div id="demo-grid-tile-13" class="demo-grid-tile" data-pattern-id="13">
+          <img src="images/tiles/t13.svg" />
+        </div>
+        <div id="demo-grid-tile-14" class="demo-grid-tile" data-pattern-id="14">
+          <img src="images/tiles/t14.svg" />
+        </div>
+        <div id="demo-grid-tile-15" class="demo-grid-tile" data-pattern-id="15">
+          <img src="images/tiles/t15.svg" />
+        </div>
+        <div id="demo-grid-color-input-1" class="demo-grid-color-input" data-color-number="1">
+          <input type="text" spellcheck="false" enterkeyhint="done" />
+          <div class="open-color-picker-button">
+            <span class="icon-eye-dropper"></span>
+          </div>
+        </div>
+        <div id="demo-grid-color-input-2" class="demo-grid-color-input" data-color-number="2">
+          <input type="text" spellcheck="false" enterkeyhint="done" />
+          <div class="open-color-picker-button">
+            <span class="icon-eye-dropper"></span>
+          </div>
+        </div>
+        <div id="demo-grid-color-input-3" class="demo-grid-color-input" data-color-number="3">
+          <input type="text" spellcheck="false" enterkeyhint="done" />
+          <div class="open-color-picker-button">
+            <span class="icon-eye-dropper"></span>
+          </div>
+        </div>
+        <div id="demo-grid-stroke-slider" class="demo-grid-slider">
+          <input type="range" min="1" max="25" class="thumb-hidden" />
+        </div>
+        <div id="demo-grid-size-slider" class="demo-grid-slider">
+          <input type="range" min="1" max="25" class="thumb-hidden" />
+        </div>
+        <div id="demo-grid-copy-button">
+          <span>copy &lt;canvas&gt; code</span>
         </div>
       </div>
-      <div id="demo-grid-tiles-wrapper">
-        <div id="demo-grid-tile-1" class="demo-grid-item">
-          <img id="demo-grid-tile-image-1" class="demo-grid-tile-image" src="images/tiles/t1.svg" data-value="1" />
+      <div id="color-picker" class="hidden">
+        <div id="color-picker-flex">
+          <div class="color-picker-item" data-color-name="MediumVioletRed" style="background-color: #c71585">
+            <span>MediumVioletRed</span>
+            <i>#C71585</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DeepPink" style="background-color: #ff1493">
+            <span>DeepPink</span>
+            <i>#FF1493</i>
+          </div>
+          <div class="color-picker-item" data-color-name="PaleVioletRed" style="background-color: #db7093">
+            <span>PaleVioletRed</span>
+            <i>#DB7093</i>
+          </div>
+          <div class="color-picker-item" data-color-name="HotPink" style="background-color: #ff69b4">
+            <span>HotPink</span>
+            <i>#FF69B4</i>
+          </div>
+          <div class="color-picker-item" data-color-name="LightPink" style="background-color: #ffb6c1">
+            <span>LightPink</span>
+            <i>#FFB6C1</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Pink" style="background-color: #ffc0cb">
+            <span>Pink</span>
+            <i>#FFC0CB</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DarkRed" style="background-color: #8b0000">
+            <span>DarkRed</span>
+            <i>#8B0000</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Red" style="background-color: #ff0000">
+            <span>Red</span>
+            <i>#FF0000</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Firebrick" style="background-color: #b22222">
+            <span>Firebrick</span>
+            <i>#B22222</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Crimson" style="background-color: #dc143c">
+            <span>Crimson</span>
+            <i>#DC143C</i>
+          </div>
+          <div class="color-picker-item" data-color-name="IndianRed" style="background-color: #cd5c5c">
+            <span>IndianRed</span>
+            <i>#CD5C5C</i>
+          </div>
+          <div class="color-picker-item" data-color-name="LightCoral" style="background-color: #f08080">
+            <span>LightCoral</span>
+            <i>#F08080</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Salmon" style="background-color: #fa8072">
+            <span>Salmon</span>
+            <i>#FA8072</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DarkSalmon" style="background-color: #e9967a">
+            <span>DarkSalmon</span>
+            <i>#E9967A</i>
+          </div>
+          <div class="color-picker-item" data-color-name="LightSalmon" style="background-color: #ffa07a">
+            <span>LightSalmon</span>
+            <i>#FFA07A</i>
+          </div>
+          <div class="color-picker-item" data-color-name="OrangeRed" style="background-color: #ff4500">
+            <span>OrangeRed</span>
+            <i>#FF4500</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Tomato" style="background-color: #ff6347">
+            <span>Tomato</span>
+            <i>#FF6347</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DarkOrange" style="background-color: #ff8c00">
+            <span>DarkOrange</span>
+            <i>#FF8C00</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Coral" style="background-color: #ff7f50">
+            <span>Coral</span>
+            <i>#FF7F50</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Orange" style="background-color: #ffa500">
+            <span>Orange</span>
+            <i>#FFA500</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DarkKhaki" style="background-color: #bdb76b">
+            <span>DarkKhaki</span>
+            <i>#BDB76B</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Gold" style="background-color: #ffd700">
+            <span>Gold</span>
+            <i>#FFD700</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Khaki" style="background-color: #f0e68c">
+            <span>Khaki</span>
+            <i>#F0E68C</i>
+          </div>
+          <div class="color-picker-item" data-color-name="PeachPuff" style="background-color: #ffdab9">
+            <span>PeachPuff</span>
+            <i>#FFDAB9</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Yellow" style="background-color: #ffff00">
+            <span>Yellow</span>
+            <i>#FFFF00</i>
+          </div>
+          <div class="color-picker-item" data-color-name="PaleGoldenrod" style="background-color: #eee8aa">
+            <span>PaleGoldenrod</span>
+            <i>#EEE8AA</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Moccasin" style="background-color: #ffe4b5">
+            <span>Moccasin</span>
+            <i>#FFE4B5</i>
+          </div>
+          <div class="color-picker-item" data-color-name="PapayaWhip" style="background-color: #ffefd5">
+            <span>PapayaWhip</span>
+            <i>#FFEFD5</i>
+          </div>
+          <div class="color-picker-item" data-color-name="LightGoldenrodYellow" style="background-color: #fafad2">
+            <span>LightGoldenrodYellow</span>
+            <i>#FAFAD2</i>
+          </div>
+          <div class="color-picker-item" data-color-name="LemonChiffon" style="background-color: #fffacd">
+            <span>LemonChiffon</span>
+            <i>#FFFACD</i>
+          </div>
+          <div class="color-picker-item" data-color-name="LightYellow" style="background-color: #ffffe0">
+            <span>LightYellow</span>
+            <i>#FFFFE0</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Maroon" style="background-color: #800000">
+            <span>Maroon</span>
+            <i>#800000</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Brown" style="background-color: #a52a2a">
+            <span>Brown</span>
+            <i>#A52A2A</i>
+          </div>
+          <div class="color-picker-item" data-color-name="SaddleBrown" style="background-color: #8b4513">
+            <span>SaddleBrown</span>
+            <i>#8B4513</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Sienna" style="background-color: #a0522d">
+            <span>Sienna</span>
+            <i>#A0522D</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Chocolate" style="background-color: #d2691e">
+            <span>Chocolate</span>
+            <i>#D2691E</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DarkGoldenrod" style="background-color: #b8860b">
+            <span>DarkGoldenrod</span>
+            <i>#B8860B</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Peru" style="background-color: #cd853f">
+            <span>Peru</span>
+            <i>#CD853F</i>
+          </div>
+          <div class="color-picker-item" data-color-name="RosyBrown" style="background-color: #bc8f8f">
+            <span>RosyBrown</span>
+            <i>#BC8F8F</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Goldenrod" style="background-color: #daa520">
+            <span>Goldenrod</span>
+            <i>#DAA520</i>
+          </div>
+          <div class="color-picker-item" data-color-name="SandyBrown" style="background-color: #f4a460">
+            <span>SandyBrown</span>
+            <i>#F4A460</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Tan" style="background-color: #d2b48c">
+            <span>Tan</span>
+            <i>#D2B48C</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Burlywood" style="background-color: #deb887">
+            <span>Burlywood</span>
+            <i>#DEB887</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Wheat" style="background-color: #f5deb3">
+            <span>Wheat</span>
+            <i>#F5DEB3</i>
+          </div>
+          <div class="color-picker-item" data-color-name="NavajoWhite" style="background-color: #ffdead">
+            <span>NavajoWhite</span>
+            <i>#FFDEAD</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Bisque" style="background-color: #ffe4c4">
+            <span>Bisque</span>
+            <i>#FFE4C4</i>
+          </div>
+          <div class="color-picker-item" data-color-name="BlanchedAlmond" style="background-color: #ffebcd">
+            <span>BlanchedAlmond</span>
+            <i>#FFEBCD</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Cornsilk" style="background-color: #fff8dc">
+            <span>Cornsilk</span>
+            <i>#FFF8DC</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Indigo" style="background-color: #4b0082">
+            <span>Indigo</span>
+            <i>#4B0082</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Purple" style="background-color: #800080">
+            <span>Purple</span>
+            <i>#800080</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DarkMagenta" style="background-color: #8b008b">
+            <span>DarkMagenta</span>
+            <i>#8B008B</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DarkViolet" style="background-color: #9400d3">
+            <span>DarkViolet</span>
+            <i>#9400D3</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DarkSlateBlue" style="background-color: #483d8b">
+            <span>DarkSlateBlue</span>
+            <i>#483D8B</i>
+          </div>
+          <div class="color-picker-item" data-color-name="BlueViolet" style="background-color: #8a2be2">
+            <span>BlueViolet</span>
+            <i>#8A2BE2</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DarkOrchid" style="background-color: #9932cc">
+            <span>DarkOrchid</span>
+            <i>#9932CC</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Fuchsia" style="background-color: #ff00ff">
+            <span>Fuchsia</span>
+            <i>#FF00FF</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Magenta" style="background-color: #ff00ff">
+            <span>Magenta</span>
+            <i>#FF00FF</i>
+          </div>
+          <div class="color-picker-item" data-color-name="SlateBlue" style="background-color: #6a5acd">
+            <span>SlateBlue</span>
+            <i>#6A5ACD</i>
+          </div>
+          <div class="color-picker-item" data-color-name="MediumSlateBlue" style="background-color: #7b68ee">
+            <span>MediumSlateBlue</span>
+            <i>#7B68EE</i>
+          </div>
+          <div class="color-picker-item" data-color-name="MediumOrchid" style="background-color: #ba55d3">
+            <span>MediumOrchid</span>
+            <i>#BA55D3</i>
+          </div>
+          <div class="color-picker-item" data-color-name="MediumPurple" style="background-color: #9370db">
+            <span>MediumPurple</span>
+            <i>#9370DB</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Orchid" style="background-color: #da70d6">
+            <span>Orchid</span>
+            <i>#DA70D6</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Violet" style="background-color: #ee82ee">
+            <span>Violet</span>
+            <i>#EE82EE</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Plum" style="background-color: #dda0dd">
+            <span>Plum</span>
+            <i>#DDA0DD</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Thistle" style="background-color: #d8bfd8">
+            <span>Thistle</span>
+            <i>#D8BFD8</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Lavender" style="background-color: #e6e6fa">
+            <span>Lavender</span>
+            <i>#E6E6FA</i>
+          </div>
+          <div class="color-picker-item" data-color-name="MidnightBlue" style="background-color: #191970">
+            <span>MidnightBlue</span>
+            <i>#191970</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Navy" style="background-color: #000080">
+            <span>Navy</span>
+            <i>#000080</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DarkBlue" style="background-color: #00008b">
+            <span>DarkBlue</span>
+            <i>#00008B</i>
+          </div>
+          <div class="color-picker-item" data-color-name="MediumBlue" style="background-color: #0000cd">
+            <span>MediumBlue</span>
+            <i>#0000CD</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Blue" style="background-color: #0000ff">
+            <span>Blue</span>
+            <i>#0000FF</i>
+          </div>
+          <div class="color-picker-item" data-color-name="RoyalBlue" style="background-color: #4169e1">
+            <span>RoyalBlue</span>
+            <i>#4169E1</i>
+          </div>
+          <div class="color-picker-item" data-color-name="SteelBlue" style="background-color: #4682b4">
+            <span>SteelBlue</span>
+            <i>#4682B4</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DodgerBlue" style="background-color: #1e90ff">
+            <span>DodgerBlue</span>
+            <i>#1E90FF</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DeepSkyBlue" style="background-color: #00bfff">
+            <span>DeepSkyBlue</span>
+            <i>#00BFFF</i>
+          </div>
+          <div class="color-picker-item" data-color-name="CornflowerBlue" style="background-color: #6495ed">
+            <span>CornflowerBlue</span>
+            <i>#6495ED</i>
+          </div>
+          <div class="color-picker-item" data-color-name="SkyBlue" style="background-color: #87ceeb">
+            <span>SkyBlue</span>
+            <i>#87CEEB</i>
+          </div>
+          <div class="color-picker-item" data-color-name="LightSkyBlue" style="background-color: #87cefa">
+            <span>LightSkyBlue</span>
+            <i>#87CEFA</i>
+          </div>
+          <div class="color-picker-item" data-color-name="LightSteelBlue" style="background-color: #b0c4de">
+            <span>LightSteelBlue</span>
+            <i>#B0C4DE</i>
+          </div>
+          <div class="color-picker-item" data-color-name="LightBlue" style="background-color: #add8e6">
+            <span>LightBlue</span>
+            <i>#ADD8E6</i>
+          </div>
+          <div class="color-picker-item" data-color-name="PowderBlue" style="background-color: #b0e0e6">
+            <span>PowderBlue</span>
+            <i>#B0E0E6</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Teal" style="background-color: #008080">
+            <span>Teal</span>
+            <i>#008080</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DarkCyan" style="background-color: #008b8b">
+            <span>DarkCyan</span>
+            <i>#008B8B</i>
+          </div>
+          <div class="color-picker-item" data-color-name="LightSeaGreen" style="background-color: #20b2aa">
+            <span>LightSeaGreen</span>
+            <i>#20B2AA</i>
+          </div>
+          <div class="color-picker-item" data-color-name="CadetBlue" style="background-color: #5f9ea0">
+            <span>CadetBlue</span>
+            <i>#5F9EA0</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DarkTurquoise" style="background-color: #00ced1">
+            <span>DarkTurquoise</span>
+            <i>#00CED1</i>
+          </div>
+          <div class="color-picker-item" data-color-name="MediumTurquoise" style="background-color: #48d1cc">
+            <span>MediumTurquoise</span>
+            <i>#48D1CC</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Turquoise" style="background-color: #40e0d0">
+            <span>Turquoise</span>
+            <i>#40E0D0</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Aqua" style="background-color: #00ffff">
+            <span>Aqua</span>
+            <i>#00FFFF</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Cyan" style="background-color: #00ffff">
+            <span>Cyan</span>
+            <i>#00FFFF</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Aquamarine" style="background-color: #7fffd4">
+            <span>Aquamarine</span>
+            <i>#7FFFD4</i>
+          </div>
+          <div class="color-picker-item" data-color-name="PaleTurquoise" style="background-color: #afeeee">
+            <span>PaleTurquoise</span>
+            <i>#AFEEEE</i>
+          </div>
+          <div class="color-picker-item" data-color-name="LightCyan" style="background-color: #e0ffff">
+            <span>LightCyan</span>
+            <i>#E0FFFF</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DarkGreen" style="background-color: #006400">
+            <span>DarkGreen</span>
+            <i>#006400</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Green" style="background-color: #008000">
+            <span>Green</span>
+            <i>#008000</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DarkOliveGreen" style="background-color: #556b2f">
+            <span>DarkOliveGreen</span>
+            <i>#556B2F</i>
+          </div>
+          <div class="color-picker-item" data-color-name="ForestGreen" style="background-color: #228b22">
+            <span>ForestGreen</span>
+            <i>#228B22</i>
+          </div>
+          <div class="color-picker-item" data-color-name="SeaGreen" style="background-color: #2e8b57">
+            <span>SeaGreen</span>
+            <i>#2E8B57</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Olive" style="background-color: #808000">
+            <span>Olive</span>
+            <i>#808000</i>
+          </div>
+          <div class="color-picker-item" data-color-name="OliveDrab" style="background-color: #6b8e23">
+            <span>OliveDrab</span>
+            <i>#6B8E23</i>
+          </div>
+          <div class="color-picker-item" data-color-name="MediumSeaGreen" style="background-color: #3cb371">
+            <span>MediumSeaGreen</span>
+            <i>#3CB371</i>
+          </div>
+          <div class="color-picker-item" data-color-name="LimeGreen" style="background-color: #32cd32">
+            <span>LimeGreen</span>
+            <i>#32CD32</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Lime" style="background-color: #00ff00">
+            <span>Lime</span>
+            <i>#00FF00</i>
+          </div>
+          <div class="color-picker-item" data-color-name="SpringGreen" style="background-color: #00ff7f">
+            <span>SpringGreen</span>
+            <i>#00FF7F</i>
+          </div>
+          <div class="color-picker-item" data-color-name="MediumSpringGreen" style="background-color: #00fa9a">
+            <span>MediumSpringGreen</span>
+            <i>#00FA9A</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DarkSeaGreen" style="background-color: #8fbc8f">
+            <span>DarkSeaGreen</span>
+            <i>#8FBC8F</i>
+          </div>
+          <div class="color-picker-item" data-color-name="MediumAquamarine" style="background-color: #66cdaa">
+            <span>MediumAquamarine</span>
+            <i>#66CDAA</i>
+          </div>
+          <div class="color-picker-item" data-color-name="YellowGreen" style="background-color: #9acd32">
+            <span>YellowGreen</span>
+            <i>#9ACD32</i>
+          </div>
+          <div class="color-picker-item" data-color-name="LawnGreen" style="background-color: #7cfc00">
+            <span>LawnGreen</span>
+            <i>#7CFC00</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Chartreuse" style="background-color: #7fff00">
+            <span>Chartreuse</span>
+            <i>#7FFF00</i>
+          </div>
+          <div class="color-picker-item" data-color-name="LightGreen" style="background-color: #90ee90">
+            <span>LightGreen</span>
+            <i>#90EE90</i>
+          </div>
+          <div class="color-picker-item" data-color-name="GreenYellow" style="background-color: #adff2f">
+            <span>GreenYellow</span>
+            <i>#ADFF2F</i>
+          </div>
+          <div class="color-picker-item" data-color-name="PaleGreen" style="background-color: #98fb98">
+            <span>PaleGreen</span>
+            <i>#98FB98</i>
+          </div>
+          <div class="color-picker-item" data-color-name="MistyRose" style="background-color: #ffe4e1">
+            <span>MistyRose</span>
+            <i>#FFE4E1</i>
+          </div>
+          <div class="color-picker-item" data-color-name="AntiqueWhite" style="background-color: #faebd7">
+            <span>AntiqueWhite</span>
+            <i>#FAEBD7</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Linen" style="background-color: #faf0e6">
+            <span>Linen</span>
+            <i>#FAF0E6</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Beige" style="background-color: #f5f5dc">
+            <span>Beige</span>
+            <i>#F5F5DC</i>
+          </div>
+          <div class="color-picker-item" data-color-name="WhiteSmoke" style="background-color: #f5f5f5">
+            <span>WhiteSmoke</span>
+            <i>#F5F5F5</i>
+          </div>
+          <div class="color-picker-item" data-color-name="LavenderBlush" style="background-color: #fff0f5">
+            <span>LavenderBlush</span>
+            <i>#FFF0F5</i>
+          </div>
+          <div class="color-picker-item" data-color-name="OldLace" style="background-color: #fdf5e6">
+            <span>OldLace</span>
+            <i>#FDF5E6</i>
+          </div>
+          <div class="color-picker-item" data-color-name="AliceBlue" style="background-color: #f0f8ff">
+            <span>AliceBlue</span>
+            <i>#F0F8FF</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Seashell" style="background-color: #fff5ee">
+            <span>Seashell</span>
+            <i>#FFF5EE</i>
+          </div>
+          <div class="color-picker-item" data-color-name="GhostWhite" style="background-color: #f8f8ff">
+            <span>GhostWhite</span>
+            <i>#F8F8FF</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Honeydew" style="background-color: #f0fff0">
+            <span>Honeydew</span>
+            <i>#F0FFF0</i>
+          </div>
+          <div class="color-picker-item" data-color-name="FloralWhite" style="background-color: #fffaf0">
+            <span>FloralWhite</span>
+            <i>#FFFAF0</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Azure" style="background-color: #f0ffff">
+            <span>Azure</span>
+            <i>#F0FFFF</i>
+          </div>
+          <div class="color-picker-item" data-color-name="MintCream" style="background-color: #f5fffa">
+            <span>MintCream</span>
+            <i>#F5FFFA</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Snow" style="background-color: #fffafa">
+            <span>Snow</span>
+            <i>#FFFAFA</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Ivory" style="background-color: #fffff0">
+            <span>Ivory</span>
+            <i>#FFFFF0</i>
+          </div>
+          <div class="color-picker-item" data-color-name="White" style="background-color: #ffffff">
+            <span>White</span>
+            <i>#FFFFFF</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Black" style="background-color: #000000">
+            <span>Black</span>
+            <i>#000000</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DarkSlateGray" style="background-color: #2f4f4f">
+            <span>DarkSlateGray</span>
+            <i>#2F4F4F</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DimGray" style="background-color: #696969">
+            <span>DimGray</span>
+            <i>#696969</i>
+          </div>
+          <div class="color-picker-item" data-color-name="SlateGray" style="background-color: #708090">
+            <span>SlateGray</span>
+            <i>#708090</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Gray" style="background-color: #808080">
+            <span>Gray</span>
+            <i>#808080</i>
+          </div>
+          <div class="color-picker-item" data-color-name="LightSlateGray" style="background-color: #778899">
+            <span>LightSlateGray</span>
+            <i>#778899</i>
+          </div>
+          <div class="color-picker-item" data-color-name="DarkGray" style="background-color: #a9a9a9">
+            <span>DarkGray</span>
+            <i>#A9A9A9</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Silver" style="background-color: #c0c0c0">
+            <span>Silver</span>
+            <i>#C0C0C0</i>
+          </div>
+          <div class="color-picker-item" data-color-name="LightGray" style="background-color: #d3d3d3">
+            <span>LightGray</span>
+            <i>#D3D3D3</i>
+          </div>
+          <div class="color-picker-item" data-color-name="Gainsboro" style="background-color: #dcdcdc">
+            <span>Gainsboro</span>
+            <i>#DCDCDC</i>
+          </div>
         </div>
-        <div id="demo-grid-tile-2" class="demo-grid-item">
-          <img id="demo-grid-tile-image-2" class="demo-grid-tile-image" src="images/tiles/t2.svg" data-value="2" />
-        </div>
-        <div id="demo-grid-tile-3" class="demo-grid-item">
-          <img id="demo-grid-tile-image-3" class="demo-grid-tile-image" src="images/tiles/t3.svg" data-value="3" />
-        </div>
-        <div id="demo-grid-tile-4" class="demo-grid-item">
-          <img id="demo-grid-tile-image-4" class="demo-grid-tile-image" src="images/tiles/t4.svg" data-value="4" />
-        </div>
-        <div id="demo-grid-tile-5" class="demo-grid-item">
-          <img id="demo-grid-tile-image-5" class="demo-grid-tile-image" src="images/tiles/t5.svg" data-value="5" />
-        </div>
-        <div id="demo-grid-tile-6" class="demo-grid-item">
-          <img id="demo-grid-tile-image-6" class="demo-grid-tile-image" src="images/tiles/t6.svg" data-value="6" />
-        </div>
-        <div id="demo-grid-tile-7" class="demo-grid-item">
-          <img id="demo-grid-tile-image-7" class="demo-grid-tile-image" src="images/tiles/t7.svg" data-value="7" />
-        </div>
-        <div id="demo-grid-tile-8" class="demo-grid-item">
-          <img id="demo-grid-tile-image-8" class="demo-grid-tile-image" src="images/tiles/t8.svg" data-value="8" />
-        </div>
-        <div id="demo-grid-tile-9" class="demo-grid-item">
-          <img
-            id="demo-grid-tile-image-9"
-            class="demo-grid-tile-image demo-grid-tile-selected"
-            src="images/tiles/t9.svg"
-            data-value="9"
-          />
-        </div>
-        <div id="demo-grid-tile-10" class="demo-grid-item">
-          <img id="demo-grid-tile-image-10" class="demo-grid-tile-image" src="images/tiles/t10.svg" data-value="10" />
-        </div>
-        <div id="demo-grid-tile-11" class="demo-grid-item">
-          <img id="demo-grid-tile-image-11" class="demo-grid-tile-image" src="images/tiles/t11.svg" data-value="11" />
-        </div>
-        <div id="demo-grid-tile-12" class="demo-grid-item">
-          <img id="demo-grid-tile-image-12" class="demo-grid-tile-image" src="images/tiles/t12.svg" data-value="12" />
-        </div>
-        <div id="demo-grid-tile-13" class="demo-grid-item">
-          <img id="demo-grid-tile-image-13" class="demo-grid-tile-image" src="images/tiles/t13.svg" data-value="13" />
-        </div>
-        <div id="demo-grid-tile-14" class="demo-grid-item">
-          <img id="demo-grid-tile-image-14" class="demo-grid-tile-image" src="images/tiles/t14.svg" data-value="14" />
-        </div>
-        <div id="demo-grid-tile-15" class="demo-grid-item">
-          <img id="demo-grid-tile-image-15" class="demo-grid-tile-image" src="images/tiles/t15.svg" data-value="15" />
-        </div>
-      </div>
-      <div id="demo-grid-color-input-wrapper-1" class="demo-grid-item">
-        <input
-          id="demo-grid-color-input-1"
-          type="text"
-          spellcheck="false"
-          class="demo-grid-color-input"
-          data-value="#C41E3A"
-          value="#C41E3A"
-          enterkeyhint="done"
-          style="background-image: radial-gradient(circle, #f1f3f4 50%, #c41e3a)"
-        />
-      </div>
-      <div id="demo-grid-color-input-wrapper-2" class="demo-grid-item">
-        <input
-          id="demo-grid-color-input-2"
-          type="text"
-          spellcheck="false"
-          class="demo-grid-color-input"
-          data-value="#0C2340"
-          value="#0C2340"
-          enterkeyhint="done"
-          style="background-image: radial-gradient(circle, #f1f3f4 50%, #0c2340)"
-        />
-      </div>
-      <div id="demo-grid-color-input-wrapper-3" class="demo-grid-item">
-        <input
-          id="demo-grid-color-input-3"
-          type="text"
-          spellcheck="false"
-          class="demo-grid-color-input"
-          data-value="#FEDB00"
-          value="#FEDB00"
-          enterkeyhint="done"
-          style="background-image: radial-gradient(circle, #f1f3f4 50%, #fedb00)"
-        />
-      </div>
-      <div id="demo-grid-outline-thickness-slider-wrapper" class="demo-grid-item">
-        <input
-          id="demo-grid-outline-thickness-slider"
-          type="range"
-          min="0"
-          max="100"
-          value="50"
-          class="demo-grid-slider"
-        />
-      </div>
-      <div id="demo-grid-size-slider-wrapper" class="demo-grid-item">
-        <input id="demo-grid-size-slider" type="range" min="1" max="50" value="12" class="demo-grid-slider" />
-      </div>
-      <div id="demo-grid-copy-button-wrapper" class="demo-grid-item">
-        <div id="demo-grid-copy-button">copy &lt;canvas&gt; code</div>
       </div>
     </div>
   </body>
-  <script src="js/truchettiles.js"></script>
-  <script src="js/index.js"></script>
+  <script src="js/constants.js" type="module"></script>
+  <script src="js/tinycolor.js" type="module"></script>
+  <script src="js/utils.js" type="module"></script>
+  <script src="js/truchet-tiles.js" type="module"></script>
+  <script src="js/index.js" type="module"></script>
 </html>
