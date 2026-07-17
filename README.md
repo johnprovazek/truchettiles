@@ -5,18 +5,18 @@
 This project implements an interactive [truchet tiles](https://en.wikipedia.org/wiki/Truchet_tiles) website background.
 You can access a demo at [johnprovazek.com/truchettiles](https://www.johnprovazek.com/truchettiles/).
 
-Built using vanilla JavaScript utilizing the `<canvas>` element.
+Built with native JavaScript utilizing the canvas element.
 
 <div align="center">
   <picture>
-    <img src="https://repository-images.githubusercontent.com/472082067/562ac442-cf34-4d4e-a625-36ae3f78cc8b" width="830px" alt="Project Thumbnail Image">
+    <img src="https://repository-images.githubusercontent.com/472082067/86824ad6-5254-434d-acaa-b5d142a64aa8" width="830px" alt="Project Thumbnail Image">
   </picture>
 </div>
 
 ## Installation
 
-To utilize this truchet tiles background in your own project start by placing a `<canvas>` element with the id "truchet-tiles" within the body of your HTML file.
-There are six attributes that can be configured in the `<canvas>` element to setup the truchet tiles background.
+To utilize this truchet tiles background in your own project start by placing a canvas element with the id "truchet-tiles" within the body of your HTML file.
+There are six attributes that can be configured in the canvas element to setup the truchet tiles background.
 
 - `data-pattern` is the pattern of tile you would like to use. This value needs to be in the range 1-15. Styles can be combined using "&" as a delimiter.
 - `data-primary-color` is the primary color of the tile. This could be represented as any valid CSS color.
@@ -46,9 +46,13 @@ You will also need to include the file [truchet-tiles.js](./js/truchet-tiles.js)
 
 ## Usage
 
-Interact with the `<canvas>` with your mouse to change the orientation of the tiles.
+Interact with the truchet tiles background with your mouse to change the orientation of the tiles.
 
 ## Credits
 
 - The majority of the truchet tile designs were adapted from the designs found on this [blog post](http://arearugscarpet.blogspot.com/2014/04/the-curse-of-truchets-tiles.html).
 - [TinyColor](https://github.com/bgrins/TinyColor) was used to generate random but harmonious color palettes.
+
+## Bugs & Improvements
+
+- Reconfigure this project as a custom HTML element.

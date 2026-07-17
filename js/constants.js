@@ -4,9 +4,8 @@ export const TILES_COLOR_BLACK = "#292F33";
 export const TILES_COLOR_WHITE = "#F1F3F4";
 
 export const MATCHING_PATTERNS = [
-  [6, 7],
   [8, 9, 10],
-  [12, 13, 14, 15],
+  [11, 12, 13, 14, 15],
 ];
 
 export const PRESET_DATA_INDEX_LOCAL_STORAGE_KEY = "truchettiles-preset-data-index";
@@ -28,7 +27,7 @@ export const PRESET_DATA_LIST = [
     tileSize: "40",
   },
   {
-    pattern: "11",
+    pattern: "7",
     primaryColor: "#267CB5",
     secondaryColor: "#4EA2d9",
     strokeColor: "#8DC3E7",
