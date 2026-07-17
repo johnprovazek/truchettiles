@@ -1,5 +1,21 @@
-import tinycolor from "./tinycolor.js";
+import tinycolor from "./tinycolor.min.js";
 import { TILES_COLOR_BLACK } from "./constants.js";
+
+// Retrieves the next sequential preset data index from local storage.
+export const getPresetDataIndex = (presetDataListLength, localStorageKey) => {
+  let presetDataIndex = localStorage.getItem(localStorageKey);
+  if (presetDataIndex === null) {
+    presetDataIndex = 0;
+  } else {
+    presetDataIndex = parseInt(presetDataIndex, 10);
+    if (isNaN(presetDataIndex) || presetDataIndex < 0 || presetDataIndex >= presetDataListLength) {
+      presetDataIndex = 0;
+    }
+  }
+  const nextPresetDataIndex = (presetDataIndex + 1) % presetDataListLength;
+  localStorage.setItem(localStorageKey, nextPresetDataIndex.toString());
+  return presetDataIndex;
+};
 
 // Randomizes integer value between min and max inclusive of min and max.
 export const getRand = (min, max) => {
@@ -31,12 +47,24 @@ export const getRandHexColors = () => {
     default:
       colors = [tinycolor.random(), tinycolor.random(), tinycolor.random()];
   }
-  return colors.map((t) => t.toHexString());
+  return colors.map((t) => t.toHexString().toUpperCase());
 };
 
 // Randomizes integer value between min and max inclusive of min and max, casted to a string value.
 export const getRandToString = (min, max) => {
   return String(getRand(min, max));
+};
+
+// Checks if a color is transparent.
+export const isColorTransparent = (colorString) => {
+  const canvas = document.createElement("canvas");
+  canvas.width = 1;
+  canvas.height = 1;
+  const ctx = canvas.getContext("2d");
+  ctx.fillStyle = colorString;
+  ctx.fillRect(0, 0, 1, 1);
+  const [, , , alpha] = ctx.getImageData(0, 0, 1, 1).data;
+  return alpha < 255;
 };
 
 // Takes a percentage as input and will return true that percentage of the time.

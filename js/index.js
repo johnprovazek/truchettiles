@@ -1,182 +1,147 @@
 import { tilesSetData } from "./truchet-tiles.js";
-import { getRand, getRandHexColors, getRandToString, withChancePercentage } from "./utils.js";
 import {
-  COLOR_CHANGE_DELAY_MS,
-  COLOR_COUNT,
-  GRADIENT_PERCENT,
-  MATCHING_DESIGNS,
-  PIXEL_EDGE_ALLOWANCE,
-  TILES_COLOR_WHITE,
-} from "./constants.js";
+  getPresetDataIndex,
+  getRand,
+  getRandHexColors,
+  getRandToString,
+  isColorTransparent,
+  withChancePercentage,
+} from "./utils.js";
+import * as CONFIG from "./constants.js";
 
-// HTML Elements.
-const canvasCopyButton = document.getElementById("demo-grid-copy-button");
-const colorInputs = document.querySelectorAll(".demo-grid-color-input > input");
-const colorPicker = document.getElementById("color-picker");
-const colorPickerFlex = document.getElementById("color-picker-flex");
-const colorPickerItems = document.querySelectorAll(".color-picker-item");
-const mainPanel = document.getElementById("main-panel");
-const openColorPickerButtons = document.querySelectorAll(".open-color-picker-button");
+// Grid HTML elements.
+const demoGridContainer = document.getElementById("demo-grid-container");
 const randomizeButton = document.getElementById("demo-grid-randomize-button");
-const sizeSlider = document.querySelector("#demo-grid-size-slider > input");
-const strokeSlider = document.querySelector("#demo-grid-stroke-slider > input");
 const tiles = document.querySelectorAll(".demo-grid-tile");
+const colorInputs = document.querySelectorAll(".demo-grid-color-input-field");
+const colorButtons = document.querySelectorAll(".demo-grid-color-button");
+const strokeSizeSlider = document.getElementById("demo-grid-stroke-size-slider");
+const tileSizeSlider = document.getElementById("demo-grid-tile-size-slider");
+const copyButton = document.getElementById("demo-grid-copy-button");
 
-let activeColorPickerNumber = null; // When color picker is active this is the relevant color number.
-let colorPickerMouseTimeoutID = null; // Timeout to prevent changing color too fast when mousing over the color picker.
-let colorPickerResizeTimeoutID = null; // Timeout to prevent calling setColorPickerEdgeClasses too often on resizes.
+// Color picker HTML elements.
+const colorPickerContainer = document.getElementById("color-picker-container");
+const colorPicker = document.getElementById("color-picker");
+const colorPickerItems = [];
+const colorPickerOutsideArea = document.getElementById("color-picker-outside-area");
+
+// Rendering and timeout variables.
+let colorPickerMouseTimeoutID = null; // Timeout to prevent changing color too fast in the color picker.
+let canvasRenderAnimationFrameID = null; // Frame ID used to throttle canvas redraws.
+
+// Current tiles data.
 let tilesData = {
-  // Current tiles data.
   pattern: null,
-  color1: null,
-  color2: null,
-  color3: null,
-  stroke: null,
-  size: null,
+  primaryColor: null,
+  secondaryColor: null,
+  strokeColor: null,
+  strokeSize: null,
+  tileSize: null,
 };
+
+let activeColorType = null; // When color picker is active this is the corresponding color type.
 
 // Handles page setup.
 window.addEventListener("load", () => {
-  // Setting up event listeners.
-  canvasCopyButton.addEventListener("click", copyCanvasToClipboard);
-  colorInputs.forEach((colorInput) => {
-    colorInput.addEventListener("input", () => keyboardColorChange(colorInput));
-    colorInput.addEventListener("focusout", () => colorInputFocusOut(colorInput));
-    colorInput.addEventListener("keyup", (event) => handleColorInputEnterKey(event, colorInput));
-  });
-  colorPicker.addEventListener("mouseleave", handleColorPickerMouseLeave);
-  colorPickerItems.forEach((colorItem) => {
-    colorItem.addEventListener("mouseenter", (event) => handleColorPickerItemMouse(event, colorItem));
-    colorItem.addEventListener("click", () => handleColorPickerItemClick(colorItem));
-  });
-  document.body.addEventListener("click", (event) => handleColorPickerOutsideClick(event));
-  openColorPickerButtons.forEach((colorPickerButton) => {
-    colorPickerButton.addEventListener("click", () => handleOpenColorPickerButtonClick(colorPickerButton));
-  });
-  randomizeButton.addEventListener("click", randomizeTileConfigurations);
-  sizeSlider.addEventListener("change", () => demoSetData({ ...tilesData, size: sizeSlider.value }));
-  strokeSlider.addEventListener("change", () => demoSetData({ ...tilesData, stroke: strokeSlider.value }));
+  // Adding color picker items to the DOM (139 colors).
+  addColorPickerItems();
+
+  // Setting up grid event listeners.
+  randomizeButton.addEventListener("click", () => randomizeTiles(false));
   tiles.forEach((tile) => {
     tile.addEventListener("click", handleTileClick);
     tile.addEventListener("contextmenu", (event) => event.preventDefault());
     tile.addEventListener("touchstart", handleTileTouch);
   });
+  colorInputs.forEach((colorInput) => {
+    colorInput.addEventListener("input", () => handleKeyboardColorChange(colorInput));
+    colorInput.addEventListener("focusout", () => handleColorInputFocusOut(colorInput));
+    colorInput.addEventListener("keyup", (event) => handleColorInputEnterKey(event, colorInput));
+  });
+  colorButtons.forEach((colorButton) => {
+    colorButton.addEventListener("click", (event) => handleColorButtonClick(event, colorButton));
+  });
+  handleSliderEvents(strokeSizeSlider, "strokeSize");
+  handleSliderEvents(tileSizeSlider, "tileSize");
+  copyButton.addEventListener("click", copyCanvasToClipboard);
+
+  // Setting up color picker event listeners.
+  colorPickerContainer.addEventListener("mouseleave", handleColorPickerMouseLeave);
+  colorPickerItems.forEach((colorItem) => {
+    colorItem.addEventListener("pointerenter", (event) => handleColorPickerItemPointerEnter(event, colorItem));
+    colorItem.addEventListener("click", (event) => handleColorPickerItemClick(event, colorItem));
+  });
+  colorPickerOutsideArea.addEventListener("click", (event) => handleColorPickerOutsideClick(event));
+
   // Initializing the demo page with tiles.
-  initTiles();
+  randomizeTiles(true);
 });
 
-// Handles page resize events.
-window.addEventListener("resize", () => {
-  handleColorPickerResize();
-});
-
-// Handles initializing the demo with tiles.
-const initTiles = () => {
-  randomizeTileConfigurations();
-  sizeSlider.classList.remove("thumb-hidden");
-  strokeSlider.classList.remove("thumb-hidden");
-};
-
-// Handles updating the demos truchet tile data.
-const demoSetData = (data) => {
-  // Processing Pattern.
-  const activeTiles = document.getElementsByClassName("demo-grid-tile-selected");
-  Array.from(activeTiles).forEach((activeTile) => {
-    activeTile.classList.remove("demo-grid-tile-selected");
+// Adds color picker items (139 colors).
+const addColorPickerItems = () => {
+  const documentFragment = document.createDocumentFragment();
+  CONFIG.HTML_COLORS.forEach((color) => {
+    const colorPickerItem = document.createElement("div");
+    colorPickerItem.className = "color-picker-item";
+    colorPickerItem.dataset.colorName = color.name;
+    colorPickerItem.dataset.hexValue = color.hex;
+    colorPickerItem.style.backgroundColor = color.hex;
+    const name = document.createElement("span");
+    name.textContent = color.name;
+    colorPickerItem.appendChild(name);
+    const hex = document.createElement("i");
+    hex.textContent = color.hex;
+    colorPickerItem.appendChild(hex);
+    colorPickerItems.push(colorPickerItem);
+    documentFragment.appendChild(colorPickerItem);
   });
-  const tilePatternIDs = data.pattern.split("&");
-  tilePatternIDs.forEach((tilePatternID) => {
-    const gridTile = document.querySelector(`.demo-grid-tile[data-pattern-id="${tilePatternID}"]`);
-    gridTile.classList.add("demo-grid-tile-selected");
-  });
-  // Processing Colors.
-  for (let i = 0; i < COLOR_COUNT; i++) {
-    const color = data[`color${i + 1}`];
-    const colorInputElement = document.querySelector(`.demo-grid-color-input[data-color-number="${i + 1}"] > input`);
-    colorInputElement.style.backgroundImage = `linear-gradient(to right, ${color}, ${TILES_COLOR_WHITE} ${GRADIENT_PERCENT}%)`;
-    colorInputElement.classList.remove("color-input-border-error");
-    colorInputElement.value = color;
-  }
-  // Processing Stroke.
-  strokeSlider.value = data.stroke;
-  // Processing Size.
-  sizeSlider.value = data.size;
-  // Setting data and updating tiles.
-  tilesData = data;
-  tilesSetData(tilesData);
+  colorPicker.appendChild(documentFragment);
 };
 
-// Handles changing demo colors when color picker colors are moused over.
-const handleColorPickerItemMouse = (event, colorItem) => {
-  if (!event.sourceCapabilities.firesTouchEvents) {
-    clearTimeout(colorPickerMouseTimeoutID);
-    colorPickerMouseTimeoutID = setTimeout(() => {
-      const colorName = colorItem.dataset.colorName;
-      tilesSetData({ ...tilesData, [`color${activeColorPickerNumber}`]: colorName });
-    }, COLOR_CHANGE_DELAY_MS);
+// Handles setting up tile data with constrained randomness.
+const randomizeTiles = (init) => {
+  if (init) {
+    // Initial load uses preset data so the application is guaranteed to look decent.
+    const presetDataList = CONFIG.PRESET_DATA_LIST;
+    const presetDataIndex = getPresetDataIndex(presetDataList.length, CONFIG.PRESET_DATA_INDEX_LOCAL_STORAGE_KEY);
+    demoSetData(presetDataList[presetDataIndex]);
+  } else {
+    // Randomize button yields tile data with some constrained randomness.
+    const [randPrimaryColor, randSecondaryColor, randStrokeColor] = getRandHexColors();
+    demoSetData({
+      pattern: withChancePercentage(80) ? getRandToString(1, 15) : getRandMultiplePatterns(),
+      primaryColor: randPrimaryColor,
+      secondaryColor: randSecondaryColor,
+      strokeColor: randStrokeColor,
+      strokeSize: getRandToString(48, 100),
+      tileSize: getRandToString(20, 100),
+    });
   }
 };
 
-// Handles changing demo colors when color picker colors are clicked.
-const handleColorPickerItemClick = (colorItem) => {
-  clearTimeout(colorPickerMouseTimeoutID);
-  const colorName = colorItem.dataset.colorName;
-  colorPicker.classList.add("hidden");
-  document.body.classList.remove("clickable");
-  demoSetData({ ...tilesData, [`color${activeColorPickerNumber}`]: colorName });
-};
-
-// Handles updating the color picker edge classes on resize events.
-const handleColorPickerResize = () => {
-  if (!colorPicker.classList.contains("hidden")) {
-    clearTimeout(colorPickerResizeTimeoutID);
-    colorPickerResizeTimeoutID = setTimeout(() => setColorPickerEdgeClasses(), COLOR_CHANGE_DELAY_MS);
+// Handles getting a randomized pattern made from multiple matching patterns.
+const getRandMultiplePatterns = () => {
+  const randRangeIndex = getRand(0, CONFIG.MATCHING_PATTERNS.length - 1);
+  const randMatchRange = CONFIG.MATCHING_PATTERNS[randRangeIndex].slice();
+  const randTileCount = getRand(2, randMatchRange.length);
+  const randIndices = [];
+  while (randIndices.length < randTileCount) {
+    const randIndex = getRand(0, randMatchRange.length - 1);
+    if (!randIndices.includes(randIndex)) {
+      randIndices.push(randIndex);
+    }
   }
+  randIndices.sort((a, b) => a - b);
+  const multipleTilePatterns = randIndices.map((index) => randMatchRange[index]);
+  return multipleTilePatterns.join("&");
 };
 
-// Handles mousing outside the color picker.
-const handleColorPickerMouseLeave = () => {
-  if (!colorPicker.classList.contains("hidden")) {
-    clearTimeout(colorPickerMouseTimeoutID);
-    tilesSetData(tilesData);
+// Handles selecting tiles on desktop. Allows selecting multiple tiles when holding down the "Ctrl" key.
+const handleTileClick = (event) => {
+  const target = event.target.closest(".demo-grid-tile");
+  if (target) {
+    selectedTile(target, event.ctrlKey);
   }
-};
-
-// Handles clicking outside the color picker.
-const handleColorPickerOutsideClick = (event) => {
-  if (!colorPicker.classList.contains("hidden") && !mainPanel.contains(event.target)) {
-    clearTimeout(colorPickerMouseTimeoutID);
-    tilesSetData(tilesData);
-    colorPicker.classList.add("hidden");
-    document.body.classList.remove("clickable");
-  }
-};
-
-// Handles adding classes to color picker items along flex container edges to prevent scaling past container.
-const setColorPickerEdgeClasses = () => {
-  const edges = ["top", "bottom", "left", "right"];
-  const flexEdges = {
-    top: colorPickerFlex.offsetTop,
-    bottom: colorPickerFlex.scrollHeight,
-    left: colorPickerFlex.offsetLeft,
-    right: colorPickerFlex.offsetLeft + colorPickerFlex.offsetWidth,
-  };
-  colorPickerItems.forEach((colorPickerItem) => {
-    const colorPickerItemStyle = window.getComputedStyle(colorPickerItem);
-    const itemEdges = {
-      top: colorPickerItem.offsetTop - parseFloat(colorPickerItemStyle.paddingTop),
-      bottom: colorPickerItem.offsetTop + colorPickerItem.offsetHeight + parseFloat(colorPickerItemStyle.paddingBottom),
-      left: colorPickerItem.offsetLeft - parseFloat(colorPickerItemStyle.paddingLeft),
-      right: colorPickerItem.offsetLeft + colorPickerItem.offsetWidth + parseFloat(colorPickerItemStyle.paddingRight),
-    };
-    const scaleOriginClass =
-      "scale-origin" +
-      edges
-        .filter((edge) => Math.abs(itemEdges[edge] - flexEdges[edge]) < PIXEL_EDGE_ALLOWANCE)
-        .map((edge) => `-${edge}`)
-        .join("");
-    colorPickerItem.className = `color-picker-item ${scaleOriginClass}`;
-  });
 };
 
 // Handles selecting tiles on mobile. Allows selecting multiple tiles when tapping and holding down a tile.
@@ -192,64 +157,11 @@ const handleTileTouch = (event) => {
   }
 };
 
-// Handles selecting tiles on desktop. Allows selecting multiple tiles when holding down the "Ctrl" key.
-const handleTileClick = (event) => {
-  const target = event.target.closest(".demo-grid-tile");
-  if (target) {
-    selectedTile(target, event.ctrlKey);
-  }
-};
-
-// Handles preventing input field from jumping to the next input field when the "Enter" key is pressed.
-const handleColorInputEnterKey = (event, colorInput) => {
-  if (event.key === "Enter") {
-    colorInput.blur();
-  }
-};
-
-// Handles the click event for color picker buttons.
-const handleOpenColorPickerButtonClick = (colorPickerButton) => {
-  activeColorPickerNumber = parseInt(colorPickerButton.parentNode.dataset.colorNumber, 10);
-  colorPicker.classList.remove("hidden");
-  document.body.classList.add("clickable");
-  setColorPickerEdgeClasses();
-};
-
-// Handles setting up pseudo-randomized tile configuration values.
-const randomizeTileConfigurations = () => {
-  const [randColor1, randColor2, randColor3] = getRandHexColors();
-  demoSetData({
-    pattern: withChancePercentage(80) ? getRandToString(1, 15) : getRandMultiplePatterns(),
-    color1: randColor1,
-    color2: randColor2,
-    color3: randColor3,
-    stroke: getRandToString(12, 25),
-    size: getRandToString(5, 25),
-  });
-};
-
-// Handles getting a randomized pattern made from multiple matching patterns.
-const getRandMultiplePatterns = () => {
-  const randRangeIndex = getRand(0, MATCHING_DESIGNS.length - 1);
-  const randMatchRange = MATCHING_DESIGNS[randRangeIndex].slice();
-  const randTileCount = getRand(2, randMatchRange.length);
-  const randIndices = [];
-  while (randIndices.length < randTileCount) {
-    const randomIndex = getRand(0, randMatchRange.length - 1);
-    if (!randIndices.includes(randomIndex)) {
-      randIndices.push(randomIndex);
-    }
-  }
-  randIndices.sort((a, b) => a - b);
-  const multipleTilePatterns = randIndices.map((index) => randMatchRange[index]);
-  return multipleTilePatterns.join("&");
-};
-
 // Handles when a user selects a tile to change the pattern.
-const selectedTile = (element, multiple) => {
+const selectedTile = (element, multipleTilesClicked) => {
   const newPatternID = element.dataset.patternId;
   // Selecting one tile.
-  if (!multiple) {
+  if (!multipleTilesClicked) {
     demoSetData({ ...tilesData, pattern: newPatternID });
     return;
   }
@@ -269,33 +181,183 @@ const selectedTile = (element, multiple) => {
 };
 
 // Handles user keyboard input changes for color values.
-const keyboardColorChange = (element) => {
+const handleKeyboardColorChange = (element) => {
   const newColor = element.value;
-  const colorInputNumber = parseInt(element.parentNode.dataset.colorNumber, 10);
+  const colorType = element.parentNode.dataset.colorType;
   const isValidColor = CSS.supports("color", newColor);
   if (isValidColor) {
-    demoSetData({ ...tilesData, [`color${colorInputNumber}`]: newColor });
+    demoSetData({ ...tilesData, [colorType]: newColor });
   } else {
-    element.classList.add("color-input-border-error");
+    element.classList.add("color-error");
   }
 };
 
 // Handles when a demo color input field moves out of focus.
-const colorInputFocusOut = (element) => {
-  const colorInputNumber = parseInt(element.parentNode.dataset.colorNumber, 10);
-  element.value = tilesData[`color${colorInputNumber}`];
-  element.classList.remove("color-input-border-error");
+const handleColorInputFocusOut = (element) => {
+  const colorType = element.parentNode.dataset.colorType;
+  element.value = tilesData[colorType];
+  element.classList.remove("color-error");
+};
+
+// Handles preventing input field from jumping to the next input field when the "Enter" key is pressed.
+const handleColorInputEnterKey = (event, colorInput) => {
+  if (event.key === "Enter") {
+    colorInput.blur();
+  }
+};
+
+// Handles the click event for the input field color buttons, launching the color picker.
+const handleColorButtonClick = (event, colorButton) => {
+  event.stopPropagation();
+  activeColorType = colorButton.parentNode.dataset.colorType;
+  colorPickerContainer.classList.remove("hidden");
+  demoGridContainer.classList.add("hidden");
+  colorPickerOutsideArea.classList.add("clickable");
+};
+
+// Updates slider thumb location.
+const updateSliderThumbLocation = (slider, value) => {
+  const sliderThumb = slider.querySelector(".demo-grid-slider-thumb");
+  const percent = (value / slider.dataset.max) * 100;
+  sliderThumb.style.left = `${percent}%`;
+  sliderThumb.textContent = value;
+};
+
+// Handles interaction with the sliders.
+const handleSliderEvents = (slider, key) => {
+  const sliderClickableArea = slider.querySelector(".demo-grid-slider-container");
+  const sliderTrack = slider.querySelector(".demo-grid-slider-thumb-container");
+  const sliderThumb = slider.querySelector(".demo-grid-slider-thumb");
+  const maxValue = parseInt(slider.dataset.max, 10);
+  let grabOffset = 0;
+  let trackRectangle;
+
+  const updateSliderValue = (event) => {
+    const relativeSliderThumbLeft = event.clientX - grabOffset - trackRectangle.left;
+    const percent = relativeSliderThumbLeft / trackRectangle.width;
+    const clampedPercent = Math.max(0, Math.min(1, percent));
+    const newValue = Math.round(clampedPercent * maxValue);
+    if (tilesData[key] !== newValue) {
+      tilesData[key] = newValue;
+      updateSliderThumbLocation(slider, newValue);
+      scheduleCanvasRender();
+    }
+  };
+
+  const handlePointerUp = () => {
+    window.removeEventListener("pointermove", updateSliderValue);
+    window.removeEventListener("pointerup", handlePointerUp);
+  };
+
+  sliderClickableArea.addEventListener("pointerdown", (event) => {
+    sliderClickableArea.setPointerCapture(event.pointerId);
+    trackRectangle = sliderTrack.getBoundingClientRect();
+    const sliderThumbRectangle = sliderThumb.getBoundingClientRect();
+    const sliderThumbClicked =
+      event.clientX >= sliderThumbRectangle.left && event.clientX <= sliderThumbRectangle.right;
+    if (sliderThumbClicked) {
+      grabOffset = event.clientX - sliderThumbRectangle.left;
+    } else {
+      grabOffset = sliderThumbRectangle.width / 2;
+    }
+    updateSliderValue(event);
+    window.addEventListener("pointermove", updateSliderValue);
+    window.addEventListener("pointerup", handlePointerUp);
+  });
 };
 
 // Handles copying the truchet tiles canvas element to the clipboard.
 const copyCanvasToClipboard = () => {
   const htmlCanvasString = `<canvas id="truchet-tiles"
     data-pattern="${tilesData.pattern}"
-    data-color-1="${tilesData.color1}"
-    data-color-2="${tilesData.color2}"
-    data-color-3="${tilesData.color3}"
-    data-stroke="${tilesData.stroke}"
-    data-size="${tilesData.size}"
+    data-primary-color="${tilesData.primaryColor}"
+    data-secondary-color="${tilesData.secondaryColor}"
+    data-stroke-color="${tilesData.strokeColor}"
+    data-stroke-size="${tilesData.strokeSize}"
+    data-tile-size="${tilesData.tileSize}"
   ></canvas>`;
   navigator.clipboard.writeText(htmlCanvasString);
+};
+
+// Handles mousing outside the color picker.
+const handleColorPickerMouseLeave = () => {
+  if (!colorPickerContainer.classList.contains("hidden")) {
+    clearTimeout(colorPickerMouseTimeoutID);
+    tilesSetData(tilesData);
+  }
+};
+
+// Handles changing demo colors when color picker colors are moused over.
+const handleColorPickerItemPointerEnter = (event, colorItem) => {
+  if (event.pointerType === "mouse") {
+    clearTimeout(colorPickerMouseTimeoutID);
+    colorPickerMouseTimeoutID = setTimeout(() => {
+      const colorName = colorItem.dataset.colorName;
+      tilesSetData({ ...tilesData, [activeColorType]: colorName });
+    }, CONFIG.COLOR_PICKER_COLOR_CHANGE_DELAY_MS);
+  }
+};
+
+// Handles changing demo colors when color picker colors are clicked.
+const handleColorPickerItemClick = (event, colorItem) => {
+  clearTimeout(colorPickerMouseTimeoutID);
+  const color = event.ctrlKey ? colorItem.dataset.hexValue : colorItem.dataset.colorName;
+  colorPickerContainer.classList.add("hidden");
+  demoGridContainer.classList.remove("hidden");
+  colorPickerOutsideArea.classList.remove("clickable");
+  demoSetData({ ...tilesData, [activeColorType]: color });
+};
+
+// Handles clicking outside the color picker.
+const handleColorPickerOutsideClick = (event) => {
+  if (colorPickerContainer.classList.contains("hidden")) {
+    return;
+  }
+  if (!colorPickerContainer.contains(event.target)) {
+    clearTimeout(colorPickerMouseTimeoutID);
+    tilesSetData(tilesData);
+    colorPickerContainer.classList.add("hidden");
+    demoGridContainer.classList.remove("hidden");
+    colorPickerOutsideArea.classList.remove("clickable");
+  }
+};
+
+// Handles changes to demo data.
+const demoSetData = (newData) => {
+  tilesData = newData;
+  // Checking for transparency in the colors.
+  const hasTransparency = [tilesData.primaryColor, tilesData.secondaryColor, tilesData.strokeColor].some(
+    isColorTransparent,
+  );
+  document.documentElement.classList.toggle("transparent-background", hasTransparency);
+  colorInputs.forEach((input) => {
+    const colorType = input.parentNode.dataset.colorType;
+    const color = tilesData[colorType];
+    input.value = color;
+    input.style.backgroundImage = `linear-gradient(to right, ${color}, ${CONFIG.TILES_COLOR_WHITE} ${CONFIG.COLOR_INPUT_FIELD_GRADIENT_PERCENT}%)`;
+    input.classList.remove("color-error");
+  });
+  tiles.forEach((tile) => {
+    const patternID = tile.dataset.patternId;
+    const activePatternsIDs = new Set(tilesData.pattern.split("&"));
+    if (activePatternsIDs.has(patternID)) {
+      tile.classList.add("tile-active");
+    } else {
+      tile.classList.remove("tile-active");
+    }
+  });
+  updateSliderThumbLocation(strokeSizeSlider, tilesData.strokeSize);
+  updateSliderThumbLocation(tileSizeSlider, tilesData.tileSize);
+  scheduleCanvasRender();
+};
+
+// Throttles canvas updates.
+const scheduleCanvasRender = () => {
+  if (canvasRenderAnimationFrameID) {
+    return;
+  }
+  canvasRenderAnimationFrameID = requestAnimationFrame(() => {
+    tilesSetData(tilesData);
+    canvasRenderAnimationFrameID = null;
+  });
 };

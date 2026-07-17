@@ -1,15 +1,18 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1200">
   <style>
-    .fillColor {
-      fill: #dee1e6;
+    .primary {
+      fill: #DEE1E6;
     }
-    .strokeColor {
+    .secondary {
+      fill: #F1F3F4;
+    }
+    .stroke {
       stroke: #292F33;
       stroke-width: 30;
+      fill:none;
     }
   </style>
-  <g id="group">
-    <path class="fillColor" style="stroke-width:0;" d="M800 1200V0h400v400a200 200 0 1 0 0 400v400H800zM0 0h400c0 221-179 400-400 400V0zM0 1200V800c221 0 400 179 400 400H0z"/>
-    <path class="strokeColor" style="fill:none;" d="M800 1200V0M1200 400a200 200 0 1 0 0 400M400 0c0 221-179 400-400 400M0 800c221 0 400 179 400 400"/>
-  </g>
+  <path class="primary" d="M800 1200V0h400v400a200 200 0 1 0 0 400v400H800zM0 0h400c0 221-179 400-400 400V0zM0 1200V800c221 0 400 179 400 400H0z" />
+  <path class="secondary" d="M 800,1200 V 0 H 400 C 400,221 221,400 0,400 V 800 C 221,800 400,979 400,1200 Z M 1200,400 C 1089.543,400 1000,489.54305 1000,600 1000,710.45695 1089.543,800 1200,800 Z" />
+  <path class="stroke" d="M800 1200V0M1200 400a200 200 0 1 0 0 400M400 0c0 221-179 400-400 400M0 800c221 0 400 179 400 400" />
 </svg>
